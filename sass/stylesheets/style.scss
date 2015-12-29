@@ -1,0 +1,54 @@
+$icon-font-path: "../fonts/";
+
+@import "includes/variables";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+html, body {
+  height: 100%;
+}
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: $white;
+}
+
+h1 {
+  display: inline-block;
+}
+
+#content {
+  margin: 60px auto;
+  height: 100%;
+}
+
+ul#recipes {
+
+  & > li {
+    width: 48%;
+    display: block;
+    float: left;
+    margin-right: 4%;
+
+    &:nth-child(even) {
+      margin-right: 0;
+    }
+  }
+}
+
+#recipe-card {
+  .flavours {
+    li {
+
+      &:after {
+        content: ',';
+      }
+
+      &:last-child:after {
+        content: '';
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+body
+  include ./includes/header
+  #content.container
+    .row
+      .col-xs-12
+        if error
+          .alert.alert-error= error
+
+        //p you are logged in as #{req.user}
+        block content-top
+    .row
+      .col-xs-12
+        block content
+
+  include ./includes/footer

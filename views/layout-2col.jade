@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    include ./includes/header
+    #content.container
+      .row
+        .col-xs-12
+          block content-top
+
+        .col-xs-6
+          block content-col1
+
+        .col-xs-6
+          block content-col2
+
+    include ./includes/footer

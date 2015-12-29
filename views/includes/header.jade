@@ -1,0 +1,37 @@
+header#header
+  nav.navbar.navbar-default.navbar-fixed-top
+    .navbar-header
+      button(type="button").navbar-toggle
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href="/") Flood warnings checker
+    #navbar-collapse-1.collapse.navbar-collapse.in
+      ul.nav.navbar-nav
+        li(class=(slug === 'warnings') ? 'active' : '')
+          a(href="/warnings/") warnings
+
+      ul.nav.navbar-nav.navbar-right
+        li
+          form.navbar-form(action="/search/" method="get")
+            .input-group
+              input(placeholder="Search" type="text" name="q" id="q" value=(query) ? query : '').form-control
+              span.input-group-btn
+                button(type="submit").btn.btn-sm.btn-default
+                  span.glyphicon.glyphicon-search
+        //if user.authenticated
+        .btn-group
+          a(target="_self").btn.navbar-btn.btn-google-plus.fa.fa-google-plus
+          a(target="_self").btn.navbar-btn.btn-facebook.fa.fa-facebook
+
+        //else
+        //  li.dropdown
+        //    a(href="#" data-toggle="dropdown").dropdown-toggle
+        //      span.glyphicon.glyphicon-user #{user.username}
+        //        b.caret
+        //  ul.dropdown-menu
+        //    li
+        //      a(href="/profile/") My Profile
+        //    li
+        //      a(target="_self" href="/logout/") Logout

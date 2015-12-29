@@ -1,0 +1,36 @@
+extends layout
+block content
+
+  .panel.panel-default
+    .panel-heading
+      h2(class='panel-title') Recipes
+
+    if recipes.length > 0
+      table.table.table-striped
+        tr
+          th Name
+          th Category
+
+        each recipe in recipes
+          tr
+            td= recipe.name
+            td= recipe.category
+    else
+      .panel-body
+        p No Flavours found for your "#{query}" query
+
+  .panel.panel-default
+    .panel-heading
+      h2(class='panel-title') Flavours
+    if flavours.length > 0
+      table.table.table-striped
+        tr
+          th Name
+          th Category
+        each flavour in flavours
+          tr
+            td= flavour.name
+            td= flavour.category
+    else
+      .panel-body
+        p No Flavours found for your "#{query}" query
