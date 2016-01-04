@@ -16,7 +16,7 @@ pwd = process.env.MONGO_PWD
 
 
 if process.env.NODE_ENV == 'production'
-  mongoose.connect(config.db.prod,
+  mongoose.connect(process.env.MONGOLAB_URI,
     user: user
     pass: pwd
   )
