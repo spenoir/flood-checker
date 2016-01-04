@@ -41,7 +41,8 @@
     "slug": "^0.9.1",
     "underscore": "latest",
     "underscore.string": "latest",
-    "jspm": "^0.16.19"
+    "jspm": "^0.16.19",
+    "bower": "latest"
   },
   "devDependencies": {
     "grunt-mocha-test": "^0.12.7",
