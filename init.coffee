@@ -26,4 +26,4 @@ job.start()
 
 console.log "Express server listening on port %d in %s mode", config.port, app.settings.env
 
-app.listen config.port
+app.listen process.env.PORT || config.port
