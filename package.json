@@ -40,11 +40,11 @@
     "serve-favicon": "latest",
     "slug": "^0.9.1",
     "underscore": "latest",
-    "underscore.string": "latest"
+    "underscore.string": "latest",
+    "jspm": "^0.16.19"
   },
   "devDependencies": {
     "grunt-mocha-test": "^0.12.7",
-    "jspm": "^0.16.19",
     "mocha": "^2.3.4",
     "mocha-mongoose": "^1.1.1",
     "should": "^8.0.2",
