@@ -3,3 +3,4 @@ public/stylesheets/style.css
 bower_components
 results.txt
 jspm_packages/
+frontend/prod.js

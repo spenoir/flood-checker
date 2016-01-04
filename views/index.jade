@@ -1,17 +1,1 @@
-extends layout-2col
-
-block content-top
-  h1= title
-  p Welcome to #{title}
-
-block content-col1
-  .panel.panel-default
-    .panel-heading
-      h2(class='panel-title') Warnings
-
-    .panel-body
-      each warning in warnings
-        include ./includes/warningCard
-
-
-block content-col2
+extends layout

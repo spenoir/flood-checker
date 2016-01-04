@@ -23,6 +23,11 @@ h1 {
   font-size: 15px;
 }
 
+.navbar-form {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
 #content {
   margin: 60px auto;
   height: 100%;
@@ -43,10 +48,13 @@ ul#recipes {
 }
 
 #warning-card {
-  height: 270px;
+  height: 310px;
+  border: 1px solid $brand-primary;
+  box-shadow: 2px 3px 10px $brand-primary-darkest;
 
   h3 {
     margin-top: 0;
+    margin-bottom: 0;
     cursor: pointer;
   }
 }

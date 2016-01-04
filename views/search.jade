@@ -1,4 +1,4 @@
-extends layout
+extends layout-nojs
 block content
 
   .panel.panel-default
@@ -15,7 +15,8 @@ block content
 
         each warning in warnings
           tr
-            td= warning.description
+            td
+              a(href="/warnings/#{warning.slug}/" target="_self")= warning.description
             td= warning.eaAreaName
             td= warning.eaRegionName
             td= warning.floodArea.riverOrSea

@@ -59,22 +59,80 @@ describe('Environment Agency API wrapper', ->
 
   )
 
-  it('should save new warnings', (done) ->
-
+  it('should find new warnings', (done) ->
     api = new apiWrapper()
-
-    api.makeRequest().then(
-      (warnings) ->
-        api.newBatch(warnings.items).then( (models) ->
-          Warning.find({}, (err, warnings) ->
-            warnings.length.should.greaterThan(1)
-
-            done()
-          )
-
+    api.makeRequest().then( (response) ->
+      api.findNew(response.items).then((newWarnings) ->
+        api.newBatch(newWarnings).then((addedWarnings) ->
+          addedWarnings.length.should.greaterThan(1)
+          done()
+        ).fail((err) ->
+          err.should.equal('There are no new warnings at this time')
         )
+      )
     )
-
   )
+
+#  it('should save new warnings', (done) ->
+#
+#    api = new apiWrapper()
+#
+#    api.makeRequest(false).then(
+#      (warnings) ->
+#        api.findNew(warnings.items).then( (newWarnings) ->
+#
+#          api.newBatch(newWarnings).then( (models) ->
+#            Warning.find({}, (err, foundWarnings) ->
+#              debugger
+#              foundWarnings.length.should.greaterThan(1)
+#
+#              done()
+#            )
+#          )
+#
+#        )
+#
+#    )
+#
+#  )
+
+#  it('should save new warnings when addWarnings true', (done) ->
+#
+#    api = new apiWrapper()
+#
+#    api.makeRequest(true).then(
+#      (warnings) ->
+#
+#        debugger
+#        Warning.find({}, (err, models) ->
+#          models.length.should.equal(warnings.length)
+#
+#          done()
+#        )
+#    )
+#
+#  )
+
+#  it('should handle no new warnings', (done) ->
+#
+#    api = new apiWrapper()
+#
+#    api.makeRequest(false).then(
+#      (warnings) ->
+#        api.newBatch(warnings.items).then( (models) ->
+#          Warning.find({}, (err, warnings) ->
+#            warnings.length.should.greaterThan(1)
+#          )
+#        )
+#
+#        api.newBatch(warnings.items).then( (models) ->
+#          Warning.find({}, (err, warnings) ->
+#            debugger
+#            done()
+#          )
+#        )
+#    )
+#
+#  )
 
 )

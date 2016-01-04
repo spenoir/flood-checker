@@ -36,7 +36,35 @@ router.get('/current/json/', (req, res) ->
   api = new apiWrapper()
   api.makeRequest().then(
     (warnings) ->
-      res.json(warnings.items)
+
+      _.extend(context,
+        warnings: warnings,
+        current: true
+      )
+      api.findNew(warnings.items).then( (newWarnings) ->
+        api.newBatch(newWarnings).then((addedWarnings) ->
+          console.log "added #{addedWarnings.length} new warnings"
+        )
+      ).fail( (err) ->
+        console.log err
+
+      )
+      res.json(context)
+
+
+  )
+
+)
+
+router.get('/json/', (req, res) ->
+  context = basicPageData
+
+  warnings = Warning.find( (err, warnings) ->
+    context = _.extend(context,
+      warnings: warnings,
+      current: false
+    )
+    res.json(context)
   )
 
 )
@@ -70,15 +98,7 @@ router.get('/:warningSlug/json', (req, res) ->
 
 router.get('/', (req, res) ->
   context = basicPageData
-
-  warnings = Warning.find( (err, warnings) ->
-    context = _.extend(context,
-      warnings: warnings,
-      current: false
-    )
-    res.render('warnings', context)
-  )
-
+  res.render('warnings', context)
 )
 
 module.exports = router;

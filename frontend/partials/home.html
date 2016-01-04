@@ -1,0 +1,20 @@
+<h1>Flood warnings checker</h1>
+<p>Welcome to Flood warnings checker.
+  You can check the latest flood warnings and also historical warnings raised by
+  the <a href="https://www.gov.uk/government/organisations/environment-agency">
+    Environment Agency</a>.
+  We display flood areas on maps and provide all the data
+  available for each warning. You can also search for a warning by keyword.
+</p>
+<p>We only record alerts with a minimum severity level of 'Flood Warning' here. You
+  can visit the
+  <a href="https://www.gov.uk/government/organisations/environment-agency">
+    Enviroment Agency's</a> website to see all Flood warnings issued with lower
+  severity levels.
+</p>
+<p ng-if="currentWarnings.length === 0">
+  There are currently no flood warnings in place. Visit the <a ui-sref="root.warnings">warnings</a> page to view all previously recorded Flood warnings.
+</p>
+<p ng-if="currentWarnings.length > 0">Below you can see a list of the current flood warnings:</p>
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-if="currentWarnings.length > 0" ng-repeat="warning in currentWarnings"
+     ng-include="'/frontend/partials/warningCard.html'"></div>

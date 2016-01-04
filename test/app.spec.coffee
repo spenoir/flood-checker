@@ -2,6 +2,7 @@ request = require('supertest')
 should = require('should')
 
 app = require('../app')
+apiWrapper = require('../GetFloodData')
 
 describe('app', ->
   beforeEach () ->
@@ -19,6 +20,13 @@ describe('app', ->
     @agent
     .get('/')
     .expect(200, done)
+  )
+
+  it('should load current warnings json', (done) ->
+    @agent
+      .get('/warnings/current/json/')
+      .expect(200, done)
+
   )
 
 )

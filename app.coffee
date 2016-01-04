@@ -10,7 +10,18 @@ session = require('express-session')
 config = require('./config')
 
 mongoose = require("mongoose")
-mongoose.connect(config.db.default)
+
+user = process.env.MONGO_USER
+pwd = process.env.MONGO_PWD
+
+
+if process.env.NODE_ENV == 'production'
+  mongoose.connect(process.env.MONGOLAB_URI,
+    user: user
+    pass: pwd
+  )
+else
+  mongoose.connect(config.db.default)
 
 flash = require('connect-flash')
 passport = require("passport")
@@ -34,8 +45,12 @@ viewsDir  = "#{__dirname}/views"
 # view engine setup
 app.set "views", viewsDir
 app.set "view engine", "jade"
-app.disable "view cache"
-app.settings.port = 3000
+
+if process.env.NODE_ENV is 'production'
+  console.log 'running in production mode #{process.env.NODE_ENV}'
+else
+  app.disable "view cache"
+
 
 # uncomment after placing your favicon in /public
 #app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -63,6 +78,10 @@ app.use sassMiddleware(
 
 app.use '/static/', express.static(path.join(__dirname, "public"))
 app.use '/frontend/', express.static(path.join(__dirname, "frontend"))
+
+app.use (req, res, next) ->
+  res.env = app.settings.env
+  next()
 
 app.use passport.initialize()
 app.use passport.session()
@@ -99,12 +118,13 @@ passport.deserializeUser (user, done) ->
     done err, user
 
 
+
+
 # catch 404 and forward to error handler
 app.use (req, res, next) ->
   err = new Error("Not Found")
   err.status = 404
   next err
-  return
 
 
 # error handlers
@@ -113,25 +133,20 @@ app.use (req, res, next) ->
 # will print stacktrace
 if app.get("env") is "development"
   app.use (err, req, res, next) ->
+
     res.status err.status or 500
     res.render "error",
       message: err.message
       error: err
 
-    return
-
-
 # production error handler
 # no stacktraces leaked to user
 app.use (err, req, res, next) ->
+
   res.status err.status or 500
   res.render "error",
     message: err.message
     error: {}
 
-  return
-
 
 module.exports = app
-#app.listen app.settings.port
-#console.log "Express server listening on port %d in %s mode", app.settings.port, app.settings.env

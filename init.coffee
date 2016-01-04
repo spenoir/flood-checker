@@ -1,21 +1,23 @@
-CronJob = require('cron').CronJob;
-app = require('./app')
-apiWrapper = require('./GetFloodData')
+CronJob = require('cron').CronJob
+app = require './app'
+apiWrapper = require './GetFloodData'
+config = require './config'
 
 job = new CronJob(
-  cronTime: '58 15 * * *',
+  cronTime: '46 19 * * *'
   onTick: () ->
-    # Runs every day at 00:01:00 AM.
+    # Runs every day
     api = new apiWrapper()
-    api.makeRequest().then(
-      (warnings) ->
-        api.newBatch(warnings.items).then( (models) ->
-          console.log("Added #{models.length} new warnings")
+    api.makeRequest().then( (response) ->
+      api.findNew(response.items).then((newWarnings) ->
+        api.newBatch(newWarnings).then((addedWarnings) ->
+          console.log("Added #{addedWarnings.length} new warnings")
           Warning.find({}, (err, warnings) ->
             console.log("Total warnings: #{warnings.length}")
           )
 
         )
+      )
     )
   ,
   start: false,
@@ -23,6 +25,12 @@ job = new CronJob(
 )
 job.start()
 
-console.log "Express server listening on port %d in %s mode", app.settings.port, app.settings.env
+if app.settings.env == 'production' or process.env.DEBUG_BUILD == 'local'
+  require './build'
 
-app.listen app.settings.port
+
+
+console.log "Express server listening on port %d in %s mode",
+  process.env.PORT || config.port, app.settings.env
+
+app.listen process.env.PORT || config.port

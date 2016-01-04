@@ -1,29 +1,22 @@
-mongoose = require("mongoose")
-express = require("express")
-_ = require("underscore")
+mongoose = require "mongoose"
+express = require "express"
+_ = require "underscore"
 router = express.Router()
-passport = require("passport")
+passport = require "passport"
 
 require "./../models/warning"
-Warning = mongoose.model("Warning")
+Warning = mongoose.model "Warning"
+config = require '../config'
+
 basicPageData =
-  title: "Flood Warnings"
-  slug: "home"
+  title: config.title
 
 
 # GET home page. 
 router.get "/", (req, res) ->
   context = basicPageData
 
-  warnings = Warning.find().exec((err, warnings) ->
-    context = _.extend(context,
-      warnings: warnings
-    )
-
-    res.render "index", context
-    return
-  )
-  return
+  res.render "index", _(context).extend(env: res.env)
 
 router.get "/search/", (req, res) ->
   context = basicPageData
@@ -36,7 +29,7 @@ router.get "/search/", (req, res) ->
 
     return
 
-  context = _(context).extend(query: query)
+  _(context).extend(query: query)
 
   Warning.search(query, null, null, (err, data) ->
     context = _.extend(context,

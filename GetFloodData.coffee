@@ -5,28 +5,55 @@ slug = require('slug')
 
 require('./models/warning')
 Warning = mongoose.model('Warning')
+_ = require('lodash')
 
 class EnvAgencyApi
-  constuctor: (@name) ->
 
-  makeRequest: ->
+  makeRequest: (addWarnings=false) ->
     deferred = Q.defer()
     request(
       'http://environment.data.gov.uk/flood-monitoring/id/floods/?min-severity=2',
-      (err, res, body) ->
+      (err, res, body) =>
         if (err)
-          return deferred.reject(err)
+          deferred.reject(err)
 
-        return deferred.resolve(JSON.parse(body))
+        data = JSON.parse(body)
+        deferred.resolve(data)
+    )
+
+    return deferred.promise
+
+  findNew: (warnings) ->
+    newWarnings = []
+    deferred = Q.defer()
+    _.each(warnings, (warning, index) ->
+
+      Warning.findOne({'@id': warning['@id']}, (err, model) ->
+        if (!model)
+          newWarnings.push warning
+
+          if index == (warnings.length - 1)
+            if newWarnings.length == 0
+              debugger
+              deferred.reject 'There are no new warnings at this time'
+            else
+              deferred.resolve newWarnings
+
+      )
     )
     return deferred.promise
 
   newBatch: (warnings) ->
+
     addSlug = (warning) ->
-      warning.slug = slug(warning.description)
+      warning.slug = slug warning.description
       return warning
 
-    return Warning.create(addSlug(warning) for warning in warnings)
+    return Warning.create(addSlug(warning) for warning in warnings, (err, warnings) ->
+      if err
+        console.log err
+      return warnings
+    )
 
   newWarning: (warning) ->
     warningModel = new Warning(warning)

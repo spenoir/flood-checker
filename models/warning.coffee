@@ -11,7 +11,7 @@ WarningSchema = new mongoose.Schema(
   eaRegionName: String
   floodArea:
     '@id':
-      type: String, required: true
+      type: String
     county: String
     envelope:
       lowerCorner:

@@ -1,15 +1,11 @@
-'use strict';
+export class HeaderController {
 
-import _ from 'lodash';
+  /*@ngInject*/
+  constructor($scope) {
+    $scope.toggleMenu = function() {
+      $scope.showMenu = !$scope.showMenu;
+    }
 
-export default angular.module('floodChecker')
-  .controller('HeaderController',
-    ['$scope', '$location', '$rootScope', '$routeParams',
-      function ($scope, $location, $rootScope, $routeParams) {
-        $scope.showMenu = false;
+  }
 
-        $scope.toggleMenu = function() {
-          $scope.showMenu = !$scope.showMenu;
-        }
-      }
-    ]);
+}

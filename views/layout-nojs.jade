@@ -7,19 +7,18 @@ html
     script(type='text/javascript', src='/frontend/jspm_packages/system.js')
     script(type='text/javascript', src='/frontend/jspm_packages/npm/underscore@1.8.3/underscore-min.js')
     script(type='text/javascript', src='/frontend/system.config.js')
-    if env == 'production'
-      script(type='text/javascript', src='/frontend/prod.js')
-      
     script(type='text/javascript').
       System.import('main')
-            .catch(console.error.bind(console));
+        .catch(console.error.bind(console));
+
   body
-    div(ui-view="header")
-    div#content.container
+    include ./includes/header
+    #content.container
       .row
         .col-xs-12
-          if error
-            .alert.alert-error= error
-      .row
+          block content-top
+
         .col-xs-12
-          div(ui-view)
+          block content
+
+    include ./includes/footer

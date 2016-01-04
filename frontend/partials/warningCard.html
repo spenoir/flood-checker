@@ -1,0 +1,15 @@
+<div id="warning-card" class="panel" ng-class="warning.severityLevel === 1 ? 'panel-primary' : 'panel-secondary'">
+  <div class="panel-heading">
+    <a ng-href="/warnings/{{warning.description | slugify}}/" target="_self">
+      <h3>{{warning.description | limitTo:40}}{{warning.description.length > 40 ? '...' : ''}}</h3>
+    </a>
+  </div>
+  <div class="panel-body">
+    <h4>{{warning.severity}}</h4>
+    <ul>
+      <li><strong>Source:</strong> {{warning.floodArea.riverOrSea}}</li>
+      <li><strong>Time raised:</strong> {{warning.timeRaised | date:'medium'}}</li>
+    </ul>
+    <p>{{warning.message | limitTo:140}}{{warning.message.length > 140 ? '...' : ''}}</p>
+  </div>
+</div>
