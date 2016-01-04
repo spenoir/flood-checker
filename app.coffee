@@ -47,7 +47,7 @@ app.set "views", viewsDir
 app.set "view engine", "jade"
 if process.env.NODE_ENV isnt 'production'
   app.disable "view cache"
-app.settings.port = 3000
+
 
 # uncomment after placing your favicon in /public
 #app.use(favicon(__dirname + '/public/favicon.ico'));
