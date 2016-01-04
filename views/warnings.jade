@@ -1,17 +1,15 @@
-extends layout-2col
+extends layout
 
 block content-top
-  h1= title
-  p Welcome to #{title}
+  h1 Flood Warnings
+  if current
+    p This is a list of the <strong>current</strong> Flood Alerts issued from the Environment Agency
+  else
+    p This is a list of all Flood alerts
 
-block content-col1
-  .panel.panel-default
-    .panel-heading
-      h2(class='panel-title') Warnings
+block content
+  .row(ng-controller='WarningsController')
 
-    .panel-body
-      each warning in warnings
+    each warning in warnings
+      .col-xs-6
         include ./includes/warningCard
-
-
-block content-col2

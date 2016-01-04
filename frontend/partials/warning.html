@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class='panel-title'>Warning at {{warning.description}}</h2>
+    </div>
+    <div class="panel-body">
+      <div id="gmap">
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" bounds="map.bounds">
+          <ui-gmap-polygons models="map.polygons" path="'geom'" geodesic="true"
+                 fill="{ color: '#2c8aa7', weight: 2, opacity: '0.6' }"
+                 stroke="{ color: '#1A24A7', weight: 2, opacity: '0.7' }">
+        </ui-gmap-polygons>
+      </ui-gmap-google-map>
+      </div>
+      <h4>{{warning.message}}</h4>
+      <ul>
+        <li><strong>County:</strong> {{warning.floodArea.county}}</li>
+        <li><strong>Region:</strong> {{warning.eaRegionName}}</li>
+        <li><strong>Time raised:</strong> {{warning.timeRaised | date:'medium'}}</li>
+        <li><strong>Severity:</strong> {{warning.severity}}</li>
+        <li><strong>Source:</strong> {{warning.floodArea.riverOrSea}}</li>
+      </ul>
+    </div>
+</div>

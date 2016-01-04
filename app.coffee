@@ -7,8 +7,10 @@ bodyParser = require("body-parser")
 sassMiddleware = require("node-sass-middleware")
 session = require('express-session')
 
+config = require('./config')
+
 mongoose = require("mongoose")
-mongoose.connect("mongodb://localhost/flood-checker")
+mongoose.connect(config.db.default)
 
 flash = require('connect-flash')
 passport = require("passport")
@@ -23,17 +25,16 @@ require('./models/user')
 User = mongoose.model("User")
 Warning = mongoose.model("Warning")
 
-coffeeMiddleware = require('coffee-middleware')
-
 app = express()
 
 publicDir = "#{__dirname}/public"
+sassDir = "#{__dirname}/sass"
 viewsDir  = "#{__dirname}/views"
-coffeeDir = "#{viewsDir}/coffeescript"
 
 # view engine setup
 app.set "views", viewsDir
 app.set "view engine", "jade"
+app.disable "view cache"
 app.settings.port = 3000
 
 # uncomment after placing your favicon in /public
@@ -49,21 +50,20 @@ app.use cookieParser()
 #)
 app.use flash()
 
-app.use coffeeMiddleware(
-  src: __dirname + '/coffee'
-  compress: true
-)
-
 app.use sassMiddleware(
-  src: __dirname + "/sass/"
-  dest: __dirname + "/public"
+  src: sassDir
+  dest: publicDir
   debug: true
   force: true
-  outputStyle: "compact"
+  outputStyle: "expanded"
   sourceComments: true
   includePaths: [__dirname + "/bower_components/bootstrap-sass-official/assets/stylesheets/"]
+  prefix: '/static/'
 )
-app.use express.static(path.join(__dirname, "public"))
+
+app.use '/static/', express.static(path.join(__dirname, "public"))
+app.use '/frontend/', express.static(path.join(__dirname, "frontend"))
+
 app.use passport.initialize()
 app.use passport.session()
 app.use "/", routes

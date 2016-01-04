@@ -1,5 +1,5 @@
 {
-  "name": "eliquid-calculator",
+  "name": "flood-checker",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -22,6 +22,8 @@
     "express-uglify": "latest",
     "grunt": "^0.4.5",
     "jade": "latest",
+    "kerberos": "0.0.17",
+    "mongodb": "^2.1.2",
     "mongoose": "latest",
     "mongoose-search-plugin": "latest",
     "mongoose-text-search": "latest",
@@ -31,14 +33,41 @@
     "node-sass-middleware": "latest",
     "passport": "latest",
     "passport-local": "latest",
+    "q": "^1.4.1",
     "serve-favicon": "latest",
+    "slug": "^0.9.1",
     "underscore": "latest",
     "underscore.string": "latest"
   },
   "devDependencies": {
     "grunt-mocha-test": "^0.12.7",
+    "jspm": "^0.16.19",
     "mocha": "^2.3.4",
+    "mocha-mongoose": "^1.1.1",
     "should": "^8.0.2",
     "supertest": "^1.1.0"
+  },
+  "jspm": {
+    "directories": {
+      "baseURL": "frontend"
+    },
+    "configFile": "frontend/system.config.js",
+    "dependencies": {
+      "angular": "github:angular/bower-angular@^1.4.8",
+      "angular-bootstrap": "github:angular-ui/bootstrap-bower@^0.14.3",
+      "angular-google-maps": "github:angular-ui/angular-google-maps@^2.2.1",
+      "angular-route": "github:angular/bower-angular-route@^1.4.8",
+      "angular-simple-logger": "npm:angular-simple-logger@^0.1.5",
+      "coffee": "github:forresto/system-coffee@^0.1.2",
+      "jquery": "github:components/jquery@^2.1.4",
+      "lodash": "npm:lodash@^3.10.1",
+      "ocombe/ocLazyLoad": "github:ocombe/ocLazyLoad@^1.0.9",
+      "underscore": "npm:underscore@^1.8.3"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
   }
 }

@@ -3,34 +3,22 @@ block content
 
   .panel.panel-default
     .panel-heading
-      h2(class='panel-title') Recipes
+      h2(class='panel-title') Warnings for #{query}
 
-    if recipes.length > 0
+    if warnings.length > 0
       table.table.table-striped
         tr
-          th Name
-          th Category
+          th Description
+          th Area
+          th Region
+          th River or sea
 
-        each recipe in recipes
+        each warning in warnings
           tr
-            td= recipe.name
-            td= recipe.category
+            td= warning.description
+            td= warning.eaAreaName
+            td= warning.eaRegionName
+            td= warning.floodArea.riverOrSea
     else
       .panel-body
-        p No Flavours found for your "#{query}" query
-
-  .panel.panel-default
-    .panel-heading
-      h2(class='panel-title') Flavours
-    if flavours.length > 0
-      table.table.table-striped
-        tr
-          th Name
-          th Category
-        each flavour in flavours
-          tr
-            td= flavour.name
-            td= flavour.category
-    else
-      .panel-body
-        p No Flavours found for your "#{query}" query
+        p No Warnings found for your "#{query}" query

@@ -1,20 +1,26 @@
 doctype html
 html
   head
+    base(href="/")
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-body
-  include ./includes/header
-  #content.container
-    .row
-      .col-xs-12
-        if error
-          .alert.alert-error= error
+    link(rel='stylesheet', href='/static/stylesheets/style.css')
+    script(type='text/javascript', src='/frontend/jspm_packages/system.js')
+    script(type='text/javascript', src='/frontend/jspm_packages/npm/underscore@1.8.3/underscore-min.js')
+    script(type='text/javascript', src='/frontend/system.config.js')
+    script(type='text/javascript').
+      System.import('main')
+              .catch(console.error.bind(console));
+  body(ng-app='floodChecker')
+    include ./includes/header
+    #content.container
+      .row
+        .col-xs-12
+          if error
+            .alert.alert-error= error
 
-        //p you are logged in as #{req.user}
-        block content-top
-    .row
-      .col-xs-12
-        block content
+          block content-top
+      .row
+        .col-xs-12
+          block content
 
-  include ./includes/footer
+    include ./includes/footer

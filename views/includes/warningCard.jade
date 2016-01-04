@@ -1,7 +1,7 @@
-#recipe-card.panel.panel-primary
+#warning-card.panel(class=warning.severityLevel === 1 ? 'panel-primary' : 'panel-secondary')
   .panel-heading
-    span.pull-right #{warning.description}/10
+    a(href='/warnings/#{warning.slug}' target="_self")
+      h3 #{warning.description}
   .panel-body
-
-
-  .panel-footer.text-right
+    h4 #{warning.severity}
+    p #{warning.message}

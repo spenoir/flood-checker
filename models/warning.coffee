@@ -11,7 +11,7 @@ WarningSchema = new mongoose.Schema(
   eaRegionName: String
   floodArea:
     '@id':
-      type: String, required: true, unique: true
+      type: String, required: true
     county: String
     envelope:
       lowerCorner:
@@ -30,15 +30,17 @@ WarningSchema = new mongoose.Schema(
   message: String
   severity: String
   severityLevel: Number
-  timeMessageChanged: Date
-  timeRaised: Date
+  timeMessageChanged:
+    type: Date
+  timeRaised:
+    type: Date
   timeSeverityChanged: Date,
   slug:
-    type: String, required: true, unique: true, lowercase: true
+    type: String, required: true, lowercase: true
 )
 
 WarningSchema.plugin(uniqueValidator).plugin(searchPlugin,
-  fields: ['description', 'eaAreaName', 'eaRegionName', 'message']
+  fields: ['description', 'eaAreaName', 'eaRegionName', 'message', 'severity']
 )
 
 mongoose.model('Warning', WarningSchema)

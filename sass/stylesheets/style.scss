@@ -19,6 +19,10 @@ h1 {
   display: inline-block;
 }
 
+.btn-sm {
+  font-size: 15px;
+}
+
 #content {
   margin: 60px auto;
   height: 100%;
@@ -38,17 +42,30 @@ ul#recipes {
   }
 }
 
-#recipe-card {
-  .flavours {
-    li {
+#warning-card {
+  height: 270px;
 
-      &:after {
-        content: ',';
-      }
+  h3 {
+    margin-top: 0;
+    cursor: pointer;
+  }
+}
 
-      &:last-child:after {
-        content: '';
-      }
+.panel-secondary {
+  .panel-heading {
+
+    a {
+      color: $brand-primary;
     }
+  }
+}
+
+#gmap {
+  height: 400px;
+  width: 100%;
+
+  .angular-google-map, .angular-google-map-container {
+    height: 100%;
+    color: #2c8aa7
   }
 }
