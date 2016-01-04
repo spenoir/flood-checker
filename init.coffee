@@ -4,7 +4,7 @@ apiWrapper = require('./GetFloodData')
 config = require('./config')
 
 job = new CronJob(
-  cronTime: '43 14 * * *'
+  cronTime: '46 14 * * *'
   onTick: () ->
     # Runs every day
     api = new apiWrapper()
