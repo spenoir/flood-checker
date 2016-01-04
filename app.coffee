@@ -145,5 +145,3 @@ app.use (err, req, res, next) ->
 
 
 module.exports = app
-#app.listen app.settings.port
-#console.log "Express server listening on port %d in %s mode", app.settings.port, app.settings.env

@@ -1,6 +1,7 @@
 CronJob = require('cron').CronJob
 app = require('./app')
 apiWrapper = require('./GetFloodData')
+config = require('./config')
 
 job = new CronJob(
   cronTime: '00 12 * * *'
@@ -23,6 +24,6 @@ job = new CronJob(
 )
 job.start()
 
-console.log "Express server listening on port %d in %s mode", app.settings.port, app.settings.env
+console.log "Express server listening on port %d in %s mode", config.port, app.settings.env
 
-app.listen app.settings.port
+app.listen config.port
