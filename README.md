@@ -3,7 +3,7 @@
 ## Installation
 
   `npm install`
-  `bower install`
+  `jspm install`
 
 ## Running in JS
 
