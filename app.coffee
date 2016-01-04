@@ -10,7 +10,18 @@ session = require('express-session')
 config = require('./config')
 
 mongoose = require("mongoose")
-mongoose.connect(config.db.default)
+
+user = process.env.MONGO_USER
+pwd = process.env.MONGO_PWD
+
+
+if process.env.NODE_ENV == 'production'
+  mongoose.connect(config.db.prod,
+    user: user
+    pass: pwd
+  )
+else
+  mongoose.connect(config.db.default)
 
 flash = require('connect-flash')
 passport = require("passport")
@@ -34,7 +45,8 @@ viewsDir  = "#{__dirname}/views"
 # view engine setup
 app.set "views", viewsDir
 app.set "view engine", "jade"
-app.disable "view cache"
+if process.env.NODE_ENV isnt 'production'
+  app.disable "view cache"
 app.settings.port = 3000
 
 # uncomment after placing your favicon in /public

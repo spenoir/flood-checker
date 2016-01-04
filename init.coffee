@@ -1,9 +1,9 @@
-CronJob = require('cron').CronJob;
+CronJob = require('cron').CronJob
 app = require('./app')
 apiWrapper = require('./GetFloodData')
 
 job = new CronJob(
-  cronTime: '00 12 * * *',
+  cronTime: '00 12 * * *'
   onTick: () ->
     # Runs every day at 00:01:00 AM.
     api = new apiWrapper()
