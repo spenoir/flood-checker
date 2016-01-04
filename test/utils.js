@@ -23,8 +23,18 @@ beforeEach(function (done) {
     return done();
   }
 
+  if (mongoose.connection.name === config.db.default.split('/')[3]) {
+    mongoose.connection.close(function () {
 
-  console.log(config.db.test);
+      mongoose.connect(config.db.test, function (err) {
+        if (err) {
+          throw err;
+        }
+        return clearDB();
+      });
+    });
+  }
+
   if (mongoose.connection.readyState === 0) {
     mongoose.connect(config.db.test, function (err) {
       if (err) {
@@ -32,9 +42,8 @@ beforeEach(function (done) {
       }
       return clearDB();
     });
-  } else {
-    return clearDB();
   }
+
 });
 
 
