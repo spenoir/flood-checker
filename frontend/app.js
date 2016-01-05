@@ -8,31 +8,36 @@ import 'angular-simple-logger';
 import 'angular-google-maps';
 import 'angular-bootstrap';
 
-import 'ocLazyLoad';
 
 let app = angular.module('floodChecker',
   [
     'ngRoute', 'ui.bootstrap', 'ui.bootstrap.tpls',
-    'uiGmapgoogle-maps', 'oc.lazyLoad'
+    'uiGmapgoogle-maps', 'ui.router'
   ]
 );
 
-app.config(['$routeProvider', '$locationProvider',
-  'uiGmapGoogleMapApiProvider', '$ocLazyLoadProvider',
-    function ($routeProvider, $locationProvider,
-                uiGmapGoogleMapApiProvider, $ocLazyLoadProvider) {
+app.config(['$locationProvider', '$stateProvider',
+  'uiGmapGoogleMapApiProvider', 'urlRouterProvider',
+    function ($locationProvider, $stateProvider,
+              uiGmapGoogleMapApiProvider, $urlRouterProvider) {
 
       $locationProvider.html5Mode(true).hashPrefix('!');
 
-      $ocLazyLoadProvider.config({
-        debug: true
-      });
+      $urlRouterProvider.otherwise("/warnings");
 
-      // routes config
-      $routeProvider.
-        when('/warnings/:slug', {
-          templateUrl: '/frontend/partials/warning.html',
-          controller: 'WarningController'
+      $stateProvider
+        .state('warnings', {
+          url: "/warnings",
+          templateUrl: "/frontend/partials/warnings.html"
+        })
+        .state('warnings.current', {
+          url: "/warnings/current",
+          templateUrl: "/frontend/partials/warnings-current.html",
+          controller: 'WarningsCurrentController'
+        })
+        .state('warning', {
+          url: "/warning",
+          templateUrl: "/frontend/partials/warning.html"
         });
 
       // maps config
@@ -45,10 +50,10 @@ app.config(['$routeProvider', '$locationProvider',
     }
 ]);
 
-//angular.element(document).ready(function() {
-//  angular.bootstrap(document.body, ['floodChecker'], {
-//    strictDi: false
-//  });
+//angular.element(document).ready(function($ocLazyLoad) {
+// angular.bootstrap(document.body, ['floodChecker'], {
+//   strictDi: false
+// });
 //});
 
 export default app;

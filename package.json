@@ -62,6 +62,7 @@
       "angular-google-maps": "github:angular-ui/angular-google-maps@^2.2.1",
       "angular-route": "github:angular/bower-angular-route@^1.4.8",
       "angular-simple-logger": "npm:angular-simple-logger@^0.1.5",
+      "angular-ui-router": "github:angular-ui/ui-router@^0.2.15",
       "coffee": "github:forresto/system-coffee@^0.1.2",
       "jquery": "github:components/jquery@^2.1.4",
       "lodash": "npm:lodash@^3.10.1",

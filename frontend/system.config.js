@@ -32,6 +32,7 @@ System.config({
     "angular-google-maps": "github:angular-ui/angular-google-maps@2.2.1",
     "angular-route": "github:angular/bower-angular-route@1.4.8",
     "angular-simple-logger": "npm:angular-simple-logger@0.1.5",
+    "angular-ui-router": "github:angular-ui/ui-router@0.2.15",
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "coffee": "github:forresto/system-coffee@0.1.2",
@@ -39,12 +40,14 @@ System.config({
     "jquery": "github:components/jquery@2.1.4",
     "lodash": "npm:lodash@3.10.1",
     "ocLazyLoad": "github:ocombe/ocLazyLoad@1.0.9",
-    "ocombe/ocLazyLoad": "github:ocombe/ocLazyLoad@1.0.9",
     "underscore": "npm:underscore@1.8.3",
     "github:angular-ui/angular-google-maps@2.2.1": {
       "angular": "github:angular/bower-angular@1.4.8",
       "angular-simple-logger": "npm:angular-simple-logger@0.1.5",
       "lodash": "npm:lodash@3.10.1"
+    },
+    "github:angular-ui/ui-router@0.2.15": {
+      "angular": "github:angular/bower-angular@1.4.8"
     },
     "github:angular/bower-angular-route@1.4.8": {
       "angular": "github:angular/bower-angular@1.4.8"

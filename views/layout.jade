@@ -10,7 +10,7 @@ html
     script(type='text/javascript').
       System.import('main')
               .catch(console.error.bind(console));
-  body(ng-app='floodChecker')
+  body(ui-view)
     include ./includes/header
     #content.container
       .row

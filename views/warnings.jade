@@ -5,7 +5,8 @@ block content-top
   if current
     p This is a list of the <strong>current</strong> Flood Alerts issued from the Environment Agency
   else
-    p This is a list of all Flood alerts
+    p This is a list of all Flood alerts.
+    a(ui-sref="warnings.current") View the current alerts
 
 block content
   .row(ng-controller='WarningsController')

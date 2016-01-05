@@ -1,4 +1,4 @@
-header#header(ng-controller="HeaderController")
+header#header
   nav.navbar.navbar-default.navbar-fixed-top
     .navbar-header
       button(type="button" ng-click="toggleMenu()").navbar-toggle
@@ -10,7 +10,7 @@ header#header(ng-controller="HeaderController")
     #navbar-collapse-1.collapse.navbar-collapse.in(ng-show="showMenu")
       ul.nav.navbar-nav
         li(class=(slug === 'warnings') ? 'active' : '')
-          a(href="/warnings/") warnings
+          a(ui-sref="/warnings/") warnings
 
       ul.nav.navbar-nav.navbar-right
         li
