@@ -7,7 +7,14 @@ import 'angular-route';
 import 'angular-simple-logger';
 import 'angular-google-maps';
 import 'angular-bootstrap';
+import 'angular-ui-router';
 
+import { BaseController } from 'controllers/base';
+import { HomeController } from 'controllers/home';
+import { HeaderController } from 'controllers/header';
+import { WarningsController } from 'controllers/warnings';
+import { WarningController } from 'controllers/warning';
+import { WarningsCurrentController } from 'controllers/warnings-current';
 
 let app = angular.module('floodChecker',
   [
@@ -17,27 +24,61 @@ let app = angular.module('floodChecker',
 );
 
 app.config(['$locationProvider', '$stateProvider',
-  'uiGmapGoogleMapApiProvider', 'urlRouterProvider',
+  'uiGmapGoogleMapApiProvider', '$urlRouterProvider',
     function ($locationProvider, $stateProvider,
               uiGmapGoogleMapApiProvider, $urlRouterProvider) {
 
       $locationProvider.html5Mode(true).hashPrefix('!');
 
-      $urlRouterProvider.otherwise("/warnings");
+      $urlRouterProvider.otherwise("/");
 
       $stateProvider
-        .state('warnings', {
-          url: "/warnings",
-          templateUrl: "/frontend/partials/warnings.html"
+        .state('root', {
+          abstract: true,
+          views: {
+            'header@': {
+              controller: HeaderController,
+              templateUrl: '/frontend/partials/header.html'
+            }
+          }
         })
-        .state('warnings.current', {
-          url: "/warnings/current",
-          templateUrl: "/frontend/partials/warnings-current.html",
-          controller: 'WarningsCurrentController'
+        .state('root.home', {
+          url: "/",
+          views: {
+            '@': {
+              controller: HomeController,
+              templateUrl: '/frontend/partials/home.html'
+            }
+          }
         })
-        .state('warning', {
-          url: "/warning",
-          templateUrl: "/frontend/partials/warning.html"
+        .state('root.warnings', {
+          url: "/warnings/",
+          views: {
+            '@': {
+              templateUrl: "/frontend/partials/warnings.html",
+              controller: WarningsController
+            }
+          }
+        })
+        .state('root.warnings.current', {
+          url: "/warnings/current/",
+          views: {
+            '@': {
+              templateUrl: "/frontend/partials/warnings-current.html",
+              controller: WarningsCurrentController
+            }
+          }
+
+        })
+        .state('root.warning', {
+          url: "/warning/",
+          views: {
+            '@': {
+              templateUrl: "/frontend/partials/warning.html",
+              controller: WarningController
+            }
+          }
+
         });
 
       // maps config
@@ -49,11 +90,5 @@ app.config(['$locationProvider', '$stateProvider',
 
     }
 ]);
-
-//angular.element(document).ready(function($ocLazyLoad) {
-// angular.bootstrap(document.body, ['floodChecker'], {
-//   strictDi: false
-// });
-//});
 
 export default app;

@@ -10,17 +10,6 @@ html
     script(type='text/javascript').
       System.import('main')
               .catch(console.error.bind(console));
-  body(ui-view)
-    include ./includes/header
-    #content.container
-      .row
-        .col-xs-12
-          if error
-            .alert.alert-error= error
-
-          block content-top
-      .row
-        .col-xs-12
-          block content
-
-    include ./includes/footer
+  body
+    div(ui-view="header")
+    div(ui-view)

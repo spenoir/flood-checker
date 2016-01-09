@@ -45,7 +45,10 @@ viewsDir  = "#{__dirname}/views"
 # view engine setup
 app.set "views", viewsDir
 app.set "view engine", "jade"
-if process.env.NODE_ENV isnt 'production'
+
+if process.env.NODE_ENV is 'production'
+  console.log 'running in production mode #{process.env.NODE_ENV}'
+else
   app.disable "view cache"
 
 

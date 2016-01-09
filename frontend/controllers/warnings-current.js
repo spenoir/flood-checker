@@ -1,10 +1,18 @@
-'use strict';
+export class WarningsCurrentController{
 
-export default angular.module('floodChecker')
-  .controller('WarningsCurrentController',
-    ['$scope', '$location', '$rootScope', '$routeParams',
-      function ($scope, $location, $rootScope, $routeParams) {
+  /*@ngInject*/
+  constructor($scope){
+    debugger;
+    $scope.warnings = 'test';
+  }
 
-      }
-    ]
-  );
+}
+
+//export default angular.module('floodChecker')
+//  .controller('WarningsCurrentController',
+//    ['$scope', '$location', '$rootScope', '$routeParams',
+//      function ($scope, $location, $rootScope, $routeParams) {
+//
+//      }
+//    ]
+//  );
