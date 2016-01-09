@@ -9,7 +9,6 @@ import 'angular-google-maps';
 import 'angular-bootstrap';
 import 'angular-ui-router';
 
-import { BaseController } from 'controllers/base';
 import { HomeController } from 'controllers/home';
 import { HeaderController } from 'controllers/header';
 import { WarningsController } from 'controllers/warnings';
