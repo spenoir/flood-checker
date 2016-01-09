@@ -1,9 +1,8 @@
 export class HomeController{
 
   /*@ngInject*/
-  constructor($scope){
-    debugger;
-
+  constructor($scope, currentWarnings){
+    $scope.currentWarnings = currentWarnings.data;
   }
 
 }

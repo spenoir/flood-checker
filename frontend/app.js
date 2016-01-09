@@ -8,6 +8,7 @@ import 'angular-simple-logger';
 import 'angular-google-maps';
 import 'angular-bootstrap';
 import 'angular-ui-router';
+import 'angular-slugify';
 
 import { HomeController } from 'controllers/home';
 import { HeaderController } from 'controllers/header';
@@ -18,7 +19,7 @@ import { WarningsCurrentController } from 'controllers/warnings-current';
 let app = angular.module('floodChecker',
   [
     'ngRoute', 'ui.bootstrap', 'ui.bootstrap.tpls',
-    'uiGmapgoogle-maps', 'ui.router'
+    'uiGmapgoogle-maps', 'ui.router', 'slugifier'
   ]
 );
 
@@ -39,6 +40,11 @@ app.config(['$locationProvider', '$stateProvider',
               controller: HeaderController,
               templateUrl: '/frontend/partials/header.html'
             }
+          },
+          resolve: {
+            "currentWarnings": function($http) {
+              return $http.get('/warnings/current/json');
+            }
           }
         })
         .state('root.home', {
@@ -49,6 +55,21 @@ app.config(['$locationProvider', '$stateProvider',
               templateUrl: '/frontend/partials/home.html'
             }
           }
+        })
+        .state('root.home.warning', {
+          url: "^/warnings/:slug/",
+          views: {
+            '@': {
+              templateUrl: "/frontend/partials/warning.html",
+              controller: WarningController
+            }
+          },
+          resolve: {
+            warning: function ($http, $stateParams) {
+              return $http.get('/warnings/' + $stateParams.slug + '/json/');
+            }
+          }
+
         })
         .state('root.warnings', {
           url: "/warnings/",
@@ -69,12 +90,17 @@ app.config(['$locationProvider', '$stateProvider',
           }
 
         })
-        .state('root.warning', {
-          url: "/warning/",
+        .state('root.warnings.warning', {
+          url: "^/warnings/:slug",
           views: {
             '@': {
               templateUrl: "/frontend/partials/warning.html",
               controller: WarningController
+            }
+          },
+          resolve: {
+            warning: function ($http, $stateParams) {
+              return $http.get('/warnings/' + $stateParams.slug + '/json/');
             }
           }
 

@@ -40,6 +40,7 @@ System.config({
     "jquery": "github:components/jquery@2.1.4",
     "lodash": "npm:lodash@3.10.1",
     "ocLazyLoad": "github:ocombe/ocLazyLoad@1.0.9",
+    "angular-slugify": "github:paulsmith/angular-slugify@1.0.1",
     "underscore": "npm:underscore@1.8.3",
     "github:angular-ui/angular-google-maps@2.2.1": {
       "angular": "github:angular/bower-angular@1.4.8",

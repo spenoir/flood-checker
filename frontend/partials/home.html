@@ -3,4 +3,15 @@
   the Environment Agency. We display flood areas on maps and provide all the data
   available for each warning. You can also search for a warning by keyword.
 </p>
-<div ng-view=""></div>
+<p>We only record alerts with a minimum severity level of 'Flood Warning' here. You
+  can visit the Enviroment Agency's website to see all Flood warnings issued with lower
+  severity levels.
+</p>
+<p>Below you can see a list of the current flood warnings</p>
+
+<ul>
+  <li ng-repeat="warning in currentWarnings">
+    <a ng-href="/warnings/{{warning.description | slugify}}/">{{warning.description}}</a>
+    <pre>{{warning}}</pre>
+  </li>
+</ul>

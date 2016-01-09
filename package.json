@@ -67,6 +67,7 @@
       "jquery": "github:components/jquery@^2.1.4",
       "lodash": "npm:lodash@^3.10.1",
       "ocombe/ocLazyLoad": "github:ocombe/ocLazyLoad@^1.0.9",
+      "paulsmith/angular-slugify": "github:paulsmith/angular-slugify@^1.0.1",
       "underscore": "npm:underscore@^1.8.3"
     },
     "devDependencies": {
