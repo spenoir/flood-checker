@@ -3491,9 +3491,9 @@
       "resolved": "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz"
     },
     "moment": {
-      "version": "2.10.6",
-      "from": "moment@>=2.6.0",
-      "resolved": "https://registry.npmjs.org/moment/-/moment-2.10.6.tgz"
+      "version": "2.11.1",
+      "from": "moment@*",
+      "resolved": "https://registry.npmjs.org/moment/-/moment-2.11.1.tgz"
     },
     "moment-timezone": {
       "version": "0.3.1",

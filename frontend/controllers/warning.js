@@ -16,7 +16,6 @@ export class WarningController{
        longitude: '-0.126236'
       },
       polygons: [],
-      bounds: {},
       zoom: 15
 
     };
@@ -40,19 +39,9 @@ export class WarningController{
             var map = inst.map;
             console.log('setting center to: ' + $scope.bounds.getCenter());
 
-            $scope.map.center.latitude = $scope.bounds.getCenter().lat();
-            $scope.map.center.longitude = $scope.bounds.getCenter().lng();
+            //$scope.map.center.latitude = $scope.bounds.getCenter().lat();
+            //$scope.map.center.longitude = $scope.bounds.getCenter().lng();
 
-//                   $scope.map.bounds = {
-//                       northeast: {
-//                           latitude: $scope.bounds.getNorthEast().lat(),
-//                           longitude: $scope.bounds.getNorthEast().lng()
-//                       },
-//                       southwest: {
-//                           latitude: $scope.bounds.getSouthWest().lat(),
-//                           longitude: $scope.bounds.getSouthWest().lng()
-//                       }
-//                   };
           })
 
         });

@@ -1,15 +1,16 @@
-express = require("express")
-path = require("path")
-favicon = require("serve-favicon")
-logger = require("morgan")
-cookieParser = require("cookie-parser")
-bodyParser = require("body-parser")
-sassMiddleware = require("node-sass-middleware")
-session = require('express-session')
+express = require "express"
+path = require "path"
+favicon = require "serve-favicon"
+logger = require "morgan"
+cookieParser = require "cookie-parser"
+bodyParser = require "body-parser"
+sassMiddleware = require "node-sass-middleware"
+session = require 'express-session'
+_ = require 'underscore'
 
-config = require('./config')
+config = require './config'
 
-mongoose = require("mongoose")
+mongoose = require "mongoose"
 
 user = process.env.MONGO_USER
 pwd = process.env.MONGO_PWD
@@ -23,8 +24,8 @@ if process.env.NODE_ENV == 'production'
 else
   mongoose.connect(config.db.default)
 
-flash = require('connect-flash')
-passport = require("passport")
+flash = require 'connect-flash'
+passport = require "passport"
 LocalStrategy = require("passport-local").Strategy
 
 routes = require("./routes/index")
@@ -47,7 +48,7 @@ app.set "views", viewsDir
 app.set "view engine", "jade"
 
 if process.env.NODE_ENV is 'production'
-  console.log 'running in production mode #{process.env.NODE_ENV}'
+  console.log "running in production mode #{process.env.NODE_ENV}"
 else
   app.disable "view cache"
 
@@ -65,15 +66,21 @@ app.use cookieParser()
 #)
 app.use flash()
 
-app.use sassMiddleware(
+sassOptions =
   src: sassDir
   dest: publicDir
   debug: true
   force: true
   outputStyle: "expanded"
   sourceComments: true
-  includePaths: [__dirname + "/bower_components/bootstrap-sass-official/assets/stylesheets/"]
   prefix: '/static/'
+  includePaths: [
+    __dirname + "/bower_components/bootstrap-sass-official/assets/stylesheets/"
+    __dirname + "/bower_components/compass-breakpoint/stylesheets/"
+  ]
+
+app.use sassMiddleware(
+  sassOptions
 )
 
 app.use '/static/', express.static(path.join(__dirname, "public"))
@@ -81,13 +88,16 @@ app.use '/frontend/', express.static(path.join(__dirname, "frontend"))
 
 app.use (req, res, next) ->
   res.env = app.settings.env
+  res.context = _(config.defaultContext).extend(env: res.env)
   next()
 
 app.use passport.initialize()
 app.use passport.session()
 app.use "/", routes
 app.use "/warnings", routesWarnings
-app.locals._ = require("underscore")
+app.locals._ = require 'underscore'
+app.locals.moment = require 'moment'
+app.locals.JSON = JSON
 
 passport.authenticate('local', failureFlash: 'Incorrect Username or Password!' )
 
@@ -116,9 +126,6 @@ passport.serializeUser (user, done) ->
 passport.deserializeUser (user, done) ->
   User.findById id, (err, user) ->
     done err, user
-
-
-
 
 # catch 404 and forward to error handler
 app.use (req, res, next) ->

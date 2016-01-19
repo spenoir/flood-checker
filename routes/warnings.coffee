@@ -8,30 +8,14 @@ router = express.Router()
 require('../models/warning')
 Warning = mongoose.model('Warning')
 
-apiWrapper = require('../GetFloodData')
+apiWrapper = require('../EnvAgencyApi')
 
 basicPageData =
-  title: 'Flood warning checker',
   slug: 'warnings',
   current: false
 
-router.get('/current/', (req, res) ->
-  context = basicPageData
-
-  api = new apiWrapper()
-  api.makeRequest().then(
-    (warnings) ->
-      context = _.extend(context,
-        warnings: warnings.items,
-        current: true
-      )
-      res.render('warnings', context)
-  )
-
-)
-
 router.get('/current/json/', (req, res) ->
-  context = basicPageData
+  context = _(res.context).extend(basicPageData)
 
   api = new apiWrapper()
   api.makeRequest().then(
@@ -41,23 +25,22 @@ router.get('/current/json/', (req, res) ->
         warnings: warnings,
         current: true
       )
+
       api.findNew(warnings.items).then( (newWarnings) ->
         api.newBatch(newWarnings).then((addedWarnings) ->
           console.log "added #{addedWarnings.length} new warnings"
         )
       ).fail( (err) ->
         console.log err
-
       )
+
       res.json(context)
-
-
   )
 
 )
 
 router.get('/json/', (req, res) ->
-  context = basicPageData
+  context = _(res.context).extend(basicPageData)
 
   warnings = Warning.find( (err, warnings) ->
     context = _.extend(context,
@@ -65,7 +48,7 @@ router.get('/json/', (req, res) ->
       current: false
     )
     res.json(context)
-  )
+  ).sort('-timeRaised')
 
 )
 
@@ -84,7 +67,7 @@ router.param('warningSlug', (req, res, next, slug) ->
 )
 
 router.get('/:warningSlug', (req, res) ->
-  context = basicPageData
+  context = _(res.context).extend(basicPageData)
 
   _.extend(context,
     warning: req.warning
@@ -94,11 +77,6 @@ router.get('/:warningSlug', (req, res) ->
 
 router.get('/:warningSlug/json', (req, res) ->
   res.json(req.warning)
-)
-
-router.get('/', (req, res) ->
-  context = basicPageData
-  res.render('warnings', context)
 )
 
 module.exports = router;

@@ -3,7 +3,7 @@ utils = require('./utils')
 should = require('should')
 mongoose = require('mongoose')
 
-apiWrapper = require('../GetFloodData')
+apiWrapper = require('../EnvAgencyApi')
 require('../models/warning')
 Warning = mongoose.model('Warning')
 

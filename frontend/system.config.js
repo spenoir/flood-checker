@@ -17,7 +17,7 @@ System.config({
       "format": "global",
       "exports": "_"
     },
-    "github:angular-ui/angular-google-maps@2.2.1": {
+    "github:angular-ui/angular-google-maps@2.3.2": {
       "deps": [
         "angular",
         "lodash",
@@ -30,7 +30,7 @@ System.config({
     "AlphaGit/mongo-faceted": "github:AlphaGit/mongo-faceted@master",
     "angular": "github:angular/bower-angular@1.4.8",
     "angular-bootstrap": "github:angular-ui/bootstrap-bower@0.14.3",
-    "angular-google-maps": "github:angular-ui/angular-google-maps@2.2.1",
+    "angular-google-maps": "github:angular-ui/angular-google-maps@2.3.2",
     "angular-route": "github:angular/bower-angular-route@1.4.8",
     "angular-simple-logger": "npm:angular-simple-logger@0.1.5",
     "angular-slugify": "github:paulsmith/angular-slugify@1.0.1",
@@ -41,13 +41,11 @@ System.config({
     "core-js": "npm:core-js@1.2.6",
     "jquery": "github:components/jquery@2.1.4",
     "lodash": "npm:lodash@3.10.1",
+    "ngmap": "github:allenhwkim/angularjs-google-maps@1.16.7",
     "ocLazyLoad": "github:ocombe/ocLazyLoad@1.0.9",
+    "ocombe/ocLazyLoad": "github:ocombe/ocLazyLoad@1.0.9",
+    "paulsmith/angular-slugify": "github:paulsmith/angular-slugify@1.0.1",
     "underscore": "npm:underscore@1.8.3",
-    "github:angular-ui/angular-google-maps@2.2.1": {
-      "angular": "github:angular/bower-angular@1.4.8",
-      "angular-simple-logger": "npm:angular-simple-logger@0.1.5",
-      "lodash": "npm:lodash@3.10.1"
-    },
     "github:angular-ui/ui-router@0.2.15": {
       "angular": "github:angular/bower-angular@1.4.8"
     },

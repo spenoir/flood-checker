@@ -1,24 +1,19 @@
 doctype html
 html
   head
-    base(href="/")
-    title= title
-    link(rel='stylesheet', href='/static/stylesheets/style.css')
-    script(type='text/javascript', src='/frontend/jspm_packages/system.js')
-    script(type='text/javascript', src='/frontend/jspm_packages/npm/underscore@1.8.3/underscore-min.js')
-    script(type='text/javascript', src='/frontend/system.config.js')
-    script(type='text/javascript').
-      System.import('main')
-        .catch(console.error.bind(console));
+    include ./includes/head
 
+    block header-includes
   body
-    include ./includes/header
+    div(ui-view="header")
+
     #content.container
       .row
         .col-xs-12
           block content-top
 
         .col-xs-12
-          block content
+          div(ui-view)
+            block content
 
     include ./includes/footer

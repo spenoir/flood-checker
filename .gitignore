@@ -1,6 +1,6 @@
 node_modules/
-public/stylesheets/style.css
+#public/stylesheets/style.css
 bower_components
 results.txt
 jspm_packages/
-frontend/prod.js
+#frontend/prod.js

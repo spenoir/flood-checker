@@ -3,6 +3,7 @@ $icon-font-path: "../fonts/";
 @import "includes/variables";
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "breakpoint";
 
 
 html, body {
@@ -48,7 +49,7 @@ ul#recipes {
 }
 
 #warning-card {
-  height: 310px;
+  height: 350px;
   border: 1px solid $brand-primary;
   box-shadow: 2px 3px 10px $brand-primary-darkest;
 
@@ -56,6 +57,22 @@ ul#recipes {
     margin-top: 0;
     margin-bottom: 0;
     cursor: pointer;
+  }
+
+  @include breakpoint($smaller) {
+    height: 230px;
+  }
+
+  @include breakpoint($small) {
+    height: 280px;
+  }
+
+  @include breakpoint($medium) {
+    height: 320px;
+  }
+
+  @include breakpoint($large) {
+    height: 350px;
   }
 }
 
@@ -74,6 +91,6 @@ ul#recipes {
 
   .angular-google-map, .angular-google-map-container {
     height: 100%;
-    color: #2c8aa7
+    width: 100%;
   }
 }

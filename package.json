@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "jspm install && bower install"
+    "postinstall": "jspm init && jspm install underscore && bower install"
   },
   "engines": {
-    "node": "5.0.0"
+    "node": "5.0.0",
+    "npm": "3.3.6"
   },
   "dependencies": {
     "body-parser": "latest",
@@ -26,8 +27,9 @@
     "express-uglify": "^0.3.1",
     "grunt": "^0.4.5",
     "jade": "latest",
-    "jspm": "^0.16.19",
+    "jspm": "latest",
     "kerberos": "^0.0.17",
+    "moment": "^2.11.1",
     "mongodb": "^2.1.2",
     "mongoose": "latest",
     "mongoose-search-plugin": "^0.1.2",
@@ -68,6 +70,7 @@
       "coffee": "github:forresto/system-coffee@^0.1.2",
       "jquery": "github:components/jquery@^2.1.4",
       "lodash": "npm:lodash@^3.10.1",
+      "ngmap": "github:allenhwkim/angularjs-google-maps@^1.16.7",
       "ocombe/ocLazyLoad": "github:ocombe/ocLazyLoad@^1.0.9",
       "paulsmith/angular-slugify": "github:paulsmith/angular-slugify@^1.0.1",
       "underscore": "npm:underscore@^1.8.3"

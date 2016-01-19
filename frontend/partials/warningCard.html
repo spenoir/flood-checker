@@ -1,6 +1,6 @@
 <div id="warning-card" class="panel" ng-class="warning.severityLevel === 1 ? 'panel-primary' : 'panel-secondary'">
   <div class="panel-heading">
-    <a ng-href="/warnings/{{warning.description | slugify}}/" target="_self">
+    <a ui-sref="root.warnings.warning({slug: '{{warning.description | slugify}}'})">
       <h3>{{warning.description | limitTo:40}}{{warning.description.length > 40 ? '...' : ''}}</h3>
     </a>
   </div>

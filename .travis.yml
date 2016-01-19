@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- '5.0'
+before_script:
+- npm install -g gulp
+script: gulp mochaTest
+deploy:
+  provider: heroku
+  api_key:
+    secure: r7LwKGnnoucB0EDA2Oisg2CJhLu8hkQaXpEYSYe1lx39mCGo6wj6BnShPVmTqsrlmJAeB8eMFqXb732MejAw3n+bsnQ7obUcSgTTla3xNavU+qb1DLAacxbAzqisVopPcCLMP3Zg30tOALlc7Hej8WlAyM34Fwg+6vCox/eWzbSn7sGbNBHcFAY/X9iGZL1Z/mQNWYRW/yJh2iWbDrBLdgije0Dn5nUEWgGzq6x1kYa5nX6iOdKmxMic82QAl+Xc8cMlbrRg/8su/+X+oc7jxIugaVBiyYFQsWayI/4QyTU8f+/ODHSYBon6yzs78qgvrw+UbPx8ruOTGILN8gkCE1ZZXcC7hKqwHSDXcEUnEJd0ZIO4pRwRH45cjYC2VZ/anvHCfjZ3vdUVLLQnQhZ5+yuA2o376U+/yn7ABL2UnQx7IDosyz/MYaYh5xlVD/Lcql1VxMIRfl1SvRVKmg6P2o7D5ZzRU4Kfvb8Ntag8B0SOjZbZSO6oTjY8+GWc3uufRkSfD4j2hleCE/vsS9Aqah+8nHYBFYPgtgaPRE5XxihRZL9kte0W3DEAfpjwAs/lRdR5opGeGU1/PfOaOswUFeyUWJgS0Zeojqn1E5kETCpMYa7nypmffI/jZYd3edfji6jxHrR5NgM0pdZHuxWrvjMjQCzEKkcKVxilowqnA2M=
+  app: damp-lake-4318
+  on:
+    repo: spenoir/flood-checker

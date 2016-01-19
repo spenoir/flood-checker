@@ -13,6 +13,7 @@ import 'angular-slugify';
 import { HomeController } from 'controllers/home';
 import { HeaderController } from 'controllers/header';
 import { WarningsController } from 'controllers/warnings';
+import { SearchController } from 'controllers/search';
 import { WarningController } from 'controllers/warning';
 
 let app = angular.module('floodChecker',
@@ -29,8 +30,6 @@ app.config(['$locationProvider', '$stateProvider',
 
       $locationProvider.html5Mode(true).hashPrefix('!');
 
-      $urlRouterProvider.otherwise("/");
-
       $stateProvider
         .state('root', {
           abstract: true,
@@ -38,11 +37,6 @@ app.config(['$locationProvider', '$stateProvider',
             'header@': {
               controller: HeaderController,
               templateUrl: '/frontend/partials/header.html'
-            }
-          },
-          resolve: {
-            "currentWarnings": function($http) {
-              return $http.get('/warnings/current/json');
             }
           }
         })
@@ -52,6 +46,11 @@ app.config(['$locationProvider', '$stateProvider',
             '@': {
               controller: HomeController,
               templateUrl: '/frontend/partials/home.html'
+            }
+          },
+          resolve: {
+            "currentWarnings": function($http) {
+              return $http.get('/warnings/current/json');
             }
           }
         })
@@ -84,6 +83,19 @@ app.config(['$locationProvider', '$stateProvider',
             }
           }
         })
+        .state('root.search', {
+          url: "/search/?q",
+          views: {
+            '@': {
+              controller: SearchController
+            }
+          },
+          resolve: {
+            searchContext: function ($http, $stateParams) {
+              return $http.get('/search/json/?q='+ $stateParams.q);
+            }
+          }
+        })
         .state('root.warnings.warning', {
           url: "^/warnings/:slug/",
           views: {
@@ -102,7 +114,7 @@ app.config(['$locationProvider', '$stateProvider',
 
       // maps config
       uiGmapGoogleMapApiProvider.configure({
-        key: 'AIzaSyDDDwic6PzI5QWWbfMH72JNA8f89ZRNvvc',
+        key: 'AIzaSyCpz3aVqyXcPEp2lXGyDUfRSqyTliR4dSM',
         v: '3.18',
         libraries: 'geometry'
       });

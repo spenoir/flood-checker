@@ -1,14 +1,16 @@
 extends layout-nojs
+
 block content
 
   .panel.panel-default
     .panel-heading
-      h2(class='panel-title') Warnings for #{query}
+      h2(class='panel-title') #{warnings.length} Warnings for #{query}
 
     if warnings.length > 0
       table.table.table-striped
         tr
           th Description
+          th Date raised
           th Area
           th Region
           th River or sea
@@ -17,9 +19,19 @@ block content
           tr
             td
               a(href="/warnings/#{warning.slug}/" target="_self")= warning.description
+            td= moment(warning.timeRaised).format('DD.MM.YYYY')
             td= warning.eaAreaName
             td= warning.eaRegionName
             td= warning.floodArea.riverOrSea
     else
       .panel-body
         p No Warnings found for your "#{query}" query
+
+    #gmap
+      ui-gmap-google-map(center="map.center", zoom="map.zoom",
+      control="map.control", bounds="map.bounds", refresh="false")
+
+        ui-gmap-polygons(models="map.polygons", path="'geom'",
+        visible="true", static="true",
+        fill="{ color: '#2c8aa7', weight: 2, opacity: '0.6' }",
+        stroke="{ color: '#1A24A7', weight: 2, opacity: '0.7' }")
