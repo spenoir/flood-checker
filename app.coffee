@@ -142,18 +142,22 @@ if app.get("env") is "development"
   app.use (err, req, res, next) ->
 
     res.status err.status or 500
-    res.render "error",
+    context = _.extend(res.context,
       message: err.message
       error: err
+    )
+    res.render "error", context
 
 # production error handler
 # no stacktraces leaked to user
 app.use (err, req, res, next) ->
 
   res.status err.status or 500
-  res.render "error",
+  context = _.extend(res.context,
     message: err.message
-    error: {}
+    error: err
+  )
+  res.render "error", context
 
 
 module.exports = app

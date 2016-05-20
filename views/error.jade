@@ -1,5 +1,16 @@
-extends layout-nojs
+doctype html
+html
+  head
+    include ./includes/head
 
-block content
-  h1= message
-  h2= error.status
+    block header-includes
+
+    div(ui-view="header")
+    #content.container
+      .row.full-height-row
+        .col-xs-12.full-height-col
+          div(ui-view, ng-init="results = resultsJson")
+          span.loading
+
+
+    include ./includes/footer

@@ -7,22 +7,23 @@ block content
       h2(class='panel-title') #{warnings.length} Warnings for #{query}
 
     if warnings.length > 0
-      table.table.table-striped
-        tr
-          th Description
-          th Date raised
-          th Area
-          th Region
-          th River or sea
-
-        each warning in warnings
+      div.table-responsive.table-responsive-search
+        table.table.table-striped
           tr
-            td
-              a(href="/warnings/#{warning.slug}/" target="_self")= warning.description
-            td= moment(warning.timeRaised).format('DD.MM.YYYY')
-            td= warning.eaAreaName
-            td= warning.eaRegionName
-            td= warning.floodArea.riverOrSea
+            th Description
+            th Date raised
+            th Area
+            th Region
+            th River or sea
+
+          each warning in warnings
+            tr
+              td
+                a(href="/warnings/#{warning.slug}/" target="_self")= warning.description
+              td= moment(warning.timeRaised).format('DD.MM.YYYY')
+              td= warning.eaAreaName
+              td= warning.eaRegionName
+              td= warning.floodArea.riverOrSea
     else
       .panel-body
         p No Warnings found for your "#{query}" query

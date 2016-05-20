@@ -39461,8 +39461,10 @@ System.register('controllers/header.js', ['npm:babel-runtime@5.8.34/helpers/clas
       HeaderController =
 
       /*@ngInject*/
-      function HeaderController($scope, $rootScope) {
+      function HeaderController($scope, $state, $stateParams, $rootScope, currentWarnings) {
         _classCallCheck(this, HeaderController);
+
+        $scope.currentWarnings = currentWarnings.data.warnings.items;
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
           $scope.showMenu = false;
@@ -39690,12 +39692,12 @@ System.registerDynamic("npm:process@0.11.2/browser", [], true, function($__requi
   return module.exports;
 });
 
-System.registerDynamic("npm:process@0.11.2", ["npm:process@0.11.2/browser"], true, function($__require, exports, module) {
+System.registerDynamic("npm:process@0.11.2", ["npm:process@0.11.2/browser.js"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('npm:process@0.11.2/browser');
+  module.exports = $__require('npm:process@0.11.2/browser.js');
   global.define = __define;
   return module.exports;
 });
@@ -44076,26 +44078,34 @@ System.register('controllers/warning.js', ['npm:babel-runtime@5.8.34/helpers/cla
         };
 
         uiGmapGoogleMapApi.then(function (maps) {
-          $http.get($scope.warning.floodArea.polygon).then(function (polygon) {
-            $scope.polygons = polygon.data.features[0].geometry;
-            $scope.polygonMeta = polygon.data.features[0].properties;
-            $scope.polygons.type = "Polygon";
-            $scope.polygons.coordinates = $scope.polygons.coordinates[0];
-            $scope.map.polygons.push({ id: 1, "geom": $scope.polygons });
+          $http.get($scope.warning.floodArea.polygon).then(function (polygonData) {
+            $scope.bounds = new maps.LatLngBounds();
 
-            _.map($scope.polygons.coordinates[0], function (coord) {
-              $scope.bounds = new maps.LatLngBounds();
-              var latLng = new maps.LatLng(coord[1], coord[0]);
-              $scope.bounds.extend(latLng);
+            _.each(polygonData.data.features, function (polygon) {
+              var id = 1;
+              $scope.map.polygons.push(_.extend(polygon, { id: id, "geom": polygon.geometry }));
+
+              _.map(polygon.geometry.coordinates, function (coords) {
+                _.map(coords, function (coord) {
+                  _.map(coord, function (latLng) {
+                    var latitudeLng = new maps.LatLng(latLng[1], latLng[0]);
+                    $scope.bounds.extend(latitudeLng);
+                  });
+                });
+              });
+
+              id++;
             });
+
+            console.log('map polygons', $scope.map.polygons);
+
+            $scope.map.center.latitude = $scope.bounds.getCenter().lat();
+            $scope.map.center.longitude = $scope.bounds.getCenter().lng();
 
             uiGmapIsReady.promise(1).then(function (instances) {
               instances.forEach(function (inst) {
                 var map = inst.map;
-                console.log('setting center to: ' + $scope.bounds.getCenter());
-
-                //$scope.map.center.latitude = $scope.bounds.getCenter().lat();
-                //$scope.map.center.longitude = $scope.bounds.getCenter().lng();
+                console.log('loaded map with center of: ' + $scope.bounds.getCenter());
               });
             });
           });
@@ -44139,23 +44149,34 @@ System.register('app.js', ['babel/external-helpers', 'angular', 'jquery', 'lodas
 
         $stateProvider.state('root', {
           abstract: true,
+          onEnter: function onEnter() {
+            $('.loading').fadeOut('fast');
+          },
           views: {
             'header@': {
               controller: HeaderController,
               templateUrl: '/frontend/partials/header.html'
             }
+          },
+          resolve: {
+            currentWarnings: function currentWarnings($http) {
+              return $http.get('/warnings/current/json');
+            }
           }
         }).state('root.home', {
           url: "/",
+          parent: 'root',
           views: {
             '@': {
               controller: HomeController,
               templateUrl: '/frontend/partials/home.html'
             }
-          },
-          resolve: {
-            "currentWarnings": function currentWarnings($http) {
-              return $http.get('/warnings/current/json');
+          }
+        }).state('root.about', {
+          url: "/about",
+          views: {
+            '@': {
+              templateUrl: '/frontend/partials/about.html'
             }
           }
         }).state('root.home.warning', {
@@ -44216,7 +44237,7 @@ System.register('app.js', ['babel/external-helpers', 'angular', 'jquery', 'lodas
         // maps config
         uiGmapGoogleMapApiProvider.configure({
           key: 'AIzaSyCpz3aVqyXcPEp2lXGyDUfRSqyTliR4dSM',
-          v: '3.18',
+          v: '3.23',
           libraries: 'geometry'
         });
       }]);

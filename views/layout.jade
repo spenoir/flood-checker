@@ -6,12 +6,13 @@ html
   body
     div(ui-view="header")
     div#content.container
-      .row
-        .col-xs-12
-          if error
-            .alert.alert-error= error
+      //.row
+      //  .col-xs-12
+      //    if error
+      //      .alert.alert-error= error
       .row
         .col-xs-12
           div(ui-view, ng-init="results = resultsJson")
+          span.loading
 
     include ./includes/footer

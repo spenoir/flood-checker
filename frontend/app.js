@@ -33,24 +33,36 @@ app.config(['$locationProvider', '$stateProvider',
       $stateProvider
         .state('root', {
           abstract: true,
+          onEnter: function () {
+            $('.loading').fadeOut('fast');
+          },
           views: {
             'header@': {
               controller: HeaderController,
               templateUrl: '/frontend/partials/header.html'
             }
+          },
+          resolve: {
+            currentWarnings: function ($http) {
+              return $http.get('/warnings/current/json');
+            }
           }
         })
         .state('root.home', {
           url: "/",
+          parent: 'root',
           views: {
             '@': {
               controller: HomeController,
               templateUrl: '/frontend/partials/home.html'
             }
-          },
-          resolve: {
-            "currentWarnings": function($http) {
-              return $http.get('/warnings/current/json');
+          }
+        })
+        .state('root.about', {
+          url: "/about",
+          views: {
+            '@': {
+              templateUrl: '/frontend/partials/about.html'
             }
           }
         })
@@ -115,7 +127,7 @@ app.config(['$locationProvider', '$stateProvider',
       // maps config
       uiGmapGoogleMapApiProvider.configure({
         key: 'AIzaSyCpz3aVqyXcPEp2lXGyDUfRSqyTliR4dSM',
-        v: '3.18',
+        v: '3.23',
         libraries: 'geometry'
       });
 

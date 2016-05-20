@@ -21,27 +21,35 @@ export class WarningController{
     };
 
     uiGmapGoogleMapApi.then(function (maps) {
-      $http.get($scope.warning.floodArea.polygon).then( function (polygon) {
-        $scope.polygons = polygon.data.features[0].geometry;
-        $scope.polygonMeta = polygon.data.features[0].properties;
-        $scope.polygons.type = "Polygon";
-        $scope.polygons.coordinates = $scope.polygons.coordinates[0];
-        $scope.map.polygons.push({id: 1, "geom": $scope.polygons});
+      $http.get($scope.warning.floodArea.polygon).then( function (polygonData) {
+        $scope.bounds = new maps.LatLngBounds();
 
-        _.map($scope.polygons.coordinates[0], function(coord) {
-          $scope.bounds = new maps.LatLngBounds();
-          var latLng = new maps.LatLng(coord[1], coord[0]);
-          $scope.bounds.extend(latLng);
+        _.each(polygonData.data.features, function(polygon) {
+          var id = 1;
+          $scope.map.polygons.push(_.extend(polygon, {id: id, "geom": polygon.geometry}));
+
+          _.map(polygon.geometry.coordinates, function(coords) {
+            _.map(coords, function (coord) {
+              _.map(coord, function (latLng) {
+                var latitudeLng = new maps.LatLng(latLng[1], latLng[0]);
+                $scope.bounds.extend(latitudeLng);
+              });
+            });
+          });
+
+          id++;
+
         });
+
+        console.log('map polygons', $scope.map.polygons);
+
+        $scope.map.center.latitude = $scope.bounds.getCenter().lat();
+        $scope.map.center.longitude = $scope.bounds.getCenter().lng();
 
         uiGmapIsReady.promise(1).then(function(instances) {
           instances.forEach(function(inst) {
             var map = inst.map;
-            console.log('setting center to: ' + $scope.bounds.getCenter());
-
-            //$scope.map.center.latitude = $scope.bounds.getCenter().lat();
-            //$scope.map.center.longitude = $scope.bounds.getCenter().lng();
-
+            console.log('loaded map with center of: ' + $scope.bounds.getCenter());
           })
 
         });
