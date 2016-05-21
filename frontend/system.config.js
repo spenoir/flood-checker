@@ -7,6 +7,9 @@ System.config({
       "runtime"
     ]
   },
+  bundles: {
+    'bundle': ['app/main']
+  },
   paths: {
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
