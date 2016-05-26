@@ -4,7 +4,7 @@ export class HeaderController {
   constructor($scope, $state, $stateParams, $rootScope, currentWarnings) {
     $scope.currentWarnings = currentWarnings.data.warnings.items;
 
-    $rootScope.$on('$stateChangeSuccess',
+    $scope.$on('$stateChangeSuccess',
       function(event, toState, toParams, fromState, fromParams){
         $scope.showMenu = false;
       }

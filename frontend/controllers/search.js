@@ -1,8 +1,9 @@
+'use strict';
+
 export class SearchController {
 
   /*@ngInject*/
   constructor($scope, $http, searchContext, uiGmapGoogleMapApi, uiGmapIsReady){
-
 
     $scope.map = {
       center: {
@@ -13,7 +14,6 @@ export class SearchController {
       zoom: 11,
       control: {},
       bounds: {}
-
     };
 
     uiGmapGoogleMapApi.then(function (maps) {
@@ -43,7 +43,6 @@ export class SearchController {
       });
 
 
-
       $scope.$watchCollection('map.polygons', function(newval, oldval) {
 
         $scope.map.center.latitude = $scope.bounds.getCenter().lat();
@@ -64,7 +63,6 @@ export class SearchController {
           //gmap.fitBounds($scope.bounds);
 
       });
-
 
     });
   }

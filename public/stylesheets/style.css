@@ -9198,7 +9198,7 @@ html, body {
   height: 100%;
 }
 
-/* line 12, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 13, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin: 0;
@@ -9206,49 +9206,49 @@ body {
   background: #d6d6d6;
 }
 
-/* line 19, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 20, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 h1 {
   display: inline-block;
 }
 
-/* line 23, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 24, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 .btn-sm, .btn-group-sm > .btn {
   font-size: 15px;
 }
 
-/* line 27, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 28, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 .navbar-form {
   margin-left: 15px;
 }
 
-/* line 30, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 31, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 .navbar-form .input-group {
   width: 100%;
 }
 
-/* line 34, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 35, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 .collapse .navbar-form {
   padding: 0;
   margin-right: 15px;
 }
 
-/* line 40, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 41, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 .nav .label-cont {
   margin: 10px 20px 0 0;
 }
 
-/* line 43, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 44, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 .nav .label-cont .label {
   margin: 15px;
 }
 
-/* line 48, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 49, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 #content {
-  margin: 60px auto;
+  margin: 80px auto 100px;
   height: 100%;
 }
 
-/* line 55, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 56, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 ul#recipes > li {
   width: 48%;
   display: block;
@@ -9256,19 +9256,19 @@ ul#recipes > li {
   margin-right: 4%;
 }
 
-/* line 61, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 62, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 ul#recipes > li:nth-child(even) {
   margin-right: 0;
 }
 
-/* line 67, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 68, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 #warning-card {
   height: 350px;
   border: 1px solid #478dd5;
   box-shadow: 2px 3px 10px #2e3f6e;
 }
 
-/* line 72, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 73, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 #warning-card h3 {
   margin-top: 0;
   margin-bottom: 0;
@@ -9276,45 +9276,45 @@ ul#recipes > li:nth-child(even) {
 }
 
 @media (min-width: 590px) {
-  /* line 67, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+  /* line 68, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
   #warning-card {
     height: 230px;
   }
 }
 
 @media (min-width: 768px) {
-  /* line 67, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+  /* line 68, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
   #warning-card {
     height: 280px;
   }
 }
 
 @media (min-width: 990px) {
-  /* line 67, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+  /* line 68, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
   #warning-card {
     height: 320px;
   }
 }
 
 @media (min-width: 1024px) {
-  /* line 67, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+  /* line 68, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
   #warning-card {
     height: 350px;
   }
 }
 
-/* line 98, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 99, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 .panel-secondary .panel-heading a {
   color: #478dd5;
 }
 
-/* line 104, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 105, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 .full-height-row,
 .full-height-col {
   height: 100%;
 }
 
-/* line 109, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 110, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 .loading {
   display: block;
   background: url("/static/images/loading.svg") no-repeat 50% 50%;
@@ -9323,19 +9323,19 @@ ul#recipes > li:nth-child(even) {
   width: 100%;
 }
 
-/* line 117, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 118, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 #gmap {
   height: 400px;
   width: 100%;
 }
 
-/* line 121, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 122, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 #gmap .angular-google-map, #gmap .angular-google-map-container {
   height: 100%;
   width: 100%;
 }
 
-/* line 127, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 128, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 footer,
 .footer {
   position: fixed;
@@ -9347,17 +9347,23 @@ footer,
 }
 
 /* line 137, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+footer p,
+.footer p {
+  margin-bottom: 5px;
+}
+
+/* line 142, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 .table-responsive-search {
   box-shadow: inset -8px 1px 8px -5px #478dd5;
 }
 
-/* line 141, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+/* line 146, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 .badge.active {
   background: rgba(8, 0, 0, 0.5);
 }
 
 @media (min-width: 768px) {
-  /* line 146, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+  /* line 151, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
   .navbar-form {
     width: 90%;
   }

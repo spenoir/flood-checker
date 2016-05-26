@@ -34,7 +34,6 @@ class EnvAgencyApi
 
           if index == (warnings.length - 1)
             if newWarnings.length == 0
-              debugger
               deferred.reject 'There are no new warnings at this time'
             else
               deferred.resolve newWarnings

@@ -1,7 +1,9 @@
-export class HomeController{
+'use strict';
+
+export class HomeController {
 
   /*@ngInject*/
-  constructor($scope, currentWarnings){
+  constructor($scope, currentWarnings) {
     $scope.currentWarnings = currentWarnings.data.warnings.items;
   }
 

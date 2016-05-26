@@ -43,9 +43,9 @@ app.config(['$locationProvider', '$stateProvider',
             }
           },
           resolve: {
-            currentWarnings: function ($http) {
+            currentWarnings: ['$http', function ($http) {
               return $http.get('/warnings/current/json');
-            }
+            }]
           }
         })
         .state('root.home', {
@@ -75,9 +75,9 @@ app.config(['$locationProvider', '$stateProvider',
             }
           },
           resolve: {
-            warning: function ($http, $stateParams) {
+            warning: ['$http', '$stateParams', function ($http, $stateParams) {
               return $http.get('/warnings/' + $stateParams.slug + '/json/');
-            }
+            }]
           }
 
         })
@@ -90,9 +90,9 @@ app.config(['$locationProvider', '$stateProvider',
             }
           },
           resolve: {
-            warningsContext: function ($http) {
+            warningsContext: ['$http', function ($http) {
               return $http.get('/warnings/json/');
-            }
+            }]
           }
         })
         .state('root.search', {
@@ -103,9 +103,9 @@ app.config(['$locationProvider', '$stateProvider',
             }
           },
           resolve: {
-            searchContext: function ($http, $stateParams) {
+            searchContext: ['$http', '$stateParms', function ($http, $stateParams) {
               return $http.get('/search/json/?q='+ $stateParams.q);
-            }
+            }]
           }
         })
         .state('root.warnings.warning', {
@@ -117,14 +117,13 @@ app.config(['$locationProvider', '$stateProvider',
             }
           },
           resolve: {
-            warning: function ($http, $stateParams) {
+            warning: ['$http', '$stateParams', function ($http, $stateParams) {
               return $http.get('/warnings/' + $stateParams.slug + '/json/');
-            }
+            }]
           }
 
         });
 
-      // maps config
       uiGmapGoogleMapApiProvider.configure({
         key: 'AIzaSyCpz3aVqyXcPEp2lXGyDUfRSqyTliR4dSM',
         v: '3.23',

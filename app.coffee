@@ -16,7 +16,7 @@ user = process.env.MONGO_USER
 pwd = process.env.MONGO_PWD
 
 
-if process.env.NODE_ENV == 'production'
+if process.env.NODE_ENV == 'production' and process.env.NODE_ENV != 'debug-build'
   mongoose.connect(process.env.MONGOLAB_URI,
     user: user
     pass: pwd
@@ -25,16 +25,12 @@ else
   mongoose.connect(config.db.default)
 
 flash = require 'connect-flash'
-passport = require "passport"
-LocalStrategy = require("passport-local").Strategy
-
 routes = require("./routes/index")
 routesWarnings = require("./routes/warnings")
 
 require('./models/warning')
 require('./models/user')
 
-User = mongoose.model("User")
 Warning = mongoose.model("Warning")
 
 app = express()
@@ -47,23 +43,17 @@ viewsDir  = "#{__dirname}/views"
 app.set "views", viewsDir
 app.set "view engine", "jade"
 
-if process.env.NODE_ENV is 'production'
+if process.env.NODE_ENV is 'production' or process.env.NODE_ENV != 'debug-build'
   console.log "running in production mode #{process.env.NODE_ENV}"
 else
   app.disable "view cache"
 
 
-# uncomment after placing your favicon in /public
 #app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use logger("dev")
 app.use bodyParser.json()
 app.use bodyParser.urlencoded(extended: false)
 app.use cookieParser()
-#app.use session(
-#  secret: 'keyboard cat'
-#  cookie:
-#    maxAge: 60000
-#)
 app.use flash()
 
 sassOptions =
@@ -91,41 +81,11 @@ app.use (req, res, next) ->
   res.context = _(config.defaultContext).extend(env: res.env)
   next()
 
-app.use passport.initialize()
-app.use passport.session()
 app.use "/", routes
 app.use "/warnings", routesWarnings
 app.locals._ = require 'underscore'
 app.locals.moment = require 'moment'
 app.locals.JSON = JSON
-
-passport.authenticate('local', failureFlash: 'Incorrect Username or Password!' )
-
-# MIDDLEWARE
-passport.use new LocalStrategy (username, password, done) ->
-  User.findOne
-    username: username,
-    (err, user) ->
-      return done(err) if err
-      unless user
-        return done(null, false,
-          message: "Incorrect username."
-        )
-      if user.validate().errors
-        console.log errors
-        return done(null, false,
-          message: "Incorrect password."
-        )
-      done null, user
-
-  return
-
-passport.serializeUser (user, done) ->
-  done null, user.id
-
-passport.deserializeUser (user, done) ->
-  User.findById id, (err, user) ->
-    done err, user
 
 # catch 404 and forward to error handler
 app.use (req, res, next) ->

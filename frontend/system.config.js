@@ -7,9 +7,6 @@ System.config({
       "runtime"
     ]
   },
-  bundles: {
-    'bundle': ['app/main']
-  },
   paths: {
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
@@ -46,7 +43,6 @@ System.config({
     "lodash": "npm:lodash@3.10.1",
     "ngmap": "github:allenhwkim/angularjs-google-maps@1.16.7",
     "ocLazyLoad": "github:ocombe/ocLazyLoad@1.0.9",
-    "ocombe/ocLazyLoad": "github:ocombe/ocLazyLoad@1.0.9",
     "paulsmith/angular-slugify": "github:paulsmith/angular-slugify@1.0.1",
     "underscore": "npm:underscore@1.8.3",
     "github:angular-ui/ui-router@0.2.15": {
