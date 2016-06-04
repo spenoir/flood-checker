@@ -16,7 +16,7 @@ user = process.env.MONGO_USER
 pwd = process.env.MONGO_PWD
 
 
-if process.env.NODE_ENV == 'production' and process.env.NODE_ENV != 'debug-build'
+if process.env.NODE_ENV is 'production'
   mongoose.connect(process.env.MONGOLAB_URI,
     user: user
     pass: pwd
@@ -43,7 +43,7 @@ viewsDir  = "#{__dirname}/views"
 app.set "views", viewsDir
 app.set "view engine", "jade"
 
-if process.env.NODE_ENV is 'production' or process.env.NODE_ENV != 'debug-build'
+if process.env.NODE_ENV is 'production' or process.env.NODE_ENV is 'debug-build'
   console.log "running in production mode #{process.env.NODE_ENV}"
 else
   app.disable "view cache"

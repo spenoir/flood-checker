@@ -3,8 +3,10 @@
 export class SearchController {
 
   /*@ngInject*/
-  constructor($scope, $http, searchContext, uiGmapGoogleMapApi, uiGmapIsReady){
+  constructor($scope, $http, $stateParams, searchContext, uiGmapGoogleMapApi){
 
+    $scope.warnings = searchContext.data.warnings;
+    $scope.query = _.has($stateParams, 'q') ? $stateParams.q : null;
     $scope.map = {
       center: {
        latitude: '51.500152',
@@ -13,54 +15,39 @@ export class SearchController {
       polygons: [],
       zoom: 11,
       control: {},
-      bounds: {}
+      bounds: $scope.bounds
     };
 
     uiGmapGoogleMapApi.then(function (maps) {
       $scope.bounds = new maps.LatLngBounds();
 
-      angular.forEach(searchContext.data.warnings, function(warning, index) {
+      angular.forEach($scope.warnings, function(warning, index) {
 
-        $http.get(warning.floodArea.polygon).then( function (polygon) {
+        $http.get(warning.floodArea.polygon).then( function (polygonData) {
 
-          var poly = polygon.data.features[0].geometry;
-          angular.forEach(poly.coordinates, function(coords) {
+          _.each(polygonData.data.features, function(polygon) {
+            var id = 1;
+            $scope.map.polygons.push(_.extend(polygon, {id: id, "geom": polygon.geometry}));
 
-            $scope.map.polygons.push({id: warning.slug, "geom": {
-                coordinates: coords,
-                type: "Polygon"
-              }
+            _.map(polygon.geometry.coordinates, function(coords) {
+              _.map(coords, function (coord) {
+                _.map(coord, function (latLng) {
+                  var latitudeLng = new maps.LatLng(latLng[1], latLng[0]);
+                  $scope.bounds.extend(latitudeLng);
+                });
+              });
             });
 
-            angular.forEach(coords[0], function(c) {
-              var latLng = new google.maps.LatLng(c[1], c[0]);
-              $scope.bounds.extend(latLng);
-            });
+            id++;
 
           });
         });
-
       });
 
 
       $scope.$watchCollection('map.polygons', function(newval, oldval) {
-
         $scope.map.center.latitude = $scope.bounds.getCenter().lat();
         $scope.map.center.longitude = $scope.bounds.getCenter().lng();
-
-        //$scope.map.bounds = {
-        //    northeast: {
-        //      latitude: $scope.bounds.getNorthEast().lat(),
-        //      longitude: $scope.bounds.getNorthEast().lng()
-        //    },
-        //    southwest: {
-        //      latitude: $scope.bounds.getSouthWest().lat(),
-        //      longitude: $scope.bounds.getSouthWest().lng()
-        //    }
-        //  };
-
-          //var gmap = $scope.map.control.getGMap();
-          //gmap.fitBounds($scope.bounds);
 
       });
 

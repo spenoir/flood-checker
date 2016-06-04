@@ -12,23 +12,23 @@ config = require '../config'
 router.get "/", (req, res) ->
   res.render "index", res.context
 
-router.get "/search/", (req, res) ->
-  query = req.query.q
-  Warning.setKeywords (err) ->
-    if err
-      res.status 500
-      return res.render "error",
-        message: "There was an error when setting the Warning keywords"
+#router.get "/search/", (req, res) ->
+#  query = req.query.q
+#  Warning.setKeywords (err) ->
+#    if err
+#      res.status 500
+#      return res.render "error",
+#        message: "There was an error when setting the Warning keywords"
 
 
-  _(res.context).extend(query: query)
-
-  Warning.search(query, null, null, (err, data) ->
-    context = _.extend(res.context,
-      warnings: data.results
-    )
-    return res.render "search", context
-  )
+#  _(res.context).extend(query: query)
+#
+#  Warning.search(query, null, null, (err, data) ->
+#    context = _.extend(res.context,
+#      warnings: data.results
+#    )
+#    return res.render "search", context
+#  )
 
 router.get "/search/json/", (req, res) ->
   query = req.query.q
@@ -47,17 +47,6 @@ router.get "/search/json/", (req, res) ->
     )
     return res.json(res.context)
   )
-
-
-#router.get "/login/", (req, res) ->
-#  res.render "login", _.extend(basicPageData, {req: req})
-#  return
-
-#router.post "/login/", passport.authenticate('local',
-#  successRedirect: '/'
-#  failureRedirect: '/login/'
-#  failureFlash: true
-#)
 
 
 module.exports = router

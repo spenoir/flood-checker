@@ -9245,7 +9245,7 @@ h1 {
 /* line 49, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 #content {
   margin: 80px auto 100px;
-  height: 100%;
+  height: calc(100% - 180px);
 }
 
 /* line 56, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
@@ -9352,18 +9352,27 @@ footer p,
   margin-bottom: 5px;
 }
 
-/* line 142, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
-.table-responsive-search {
-  box-shadow: inset -8px 1px 8px -5px #478dd5;
+@media (min-width: 590px) {
+  /* line 142, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+  .table-responsive-search {
+    box-shadow: inset -8px 1px 8px -5px #478dd5;
+  }
 }
 
-/* line 146, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+@media (min-width: 768px) {
+  /* line 142, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+  .table-responsive-search {
+    box-shadow: none;
+  }
+}
+
+/* line 152, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
 .badge.active {
   background: rgba(8, 0, 0, 0.5);
 }
 
 @media (min-width: 768px) {
-  /* line 151, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
+  /* line 157, /Users/adam/srv/flood-checker/sass/stylesheets/style.scss */
   .navbar-form {
     width: 90%;
   }

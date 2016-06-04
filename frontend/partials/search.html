@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class='panel-title'>{{warnings.length}} Warnings for {{query}}</h2>
+  </div>
+  <div ng-if="warnings.length > 0">
+    <div class="table-responsive table-responsive-search">
+      <table class="table table-striped">
+        <tr>
+          <th>Description</th>
+          <th>Date raised</th>
+          <th>Area</th>
+          <th>Region</th>
+          <th>River or sea</th>
+        </tr>
+
+        <tr ng-repeat="warning in warnings">
+          <td><a ui-sref="root.warnings.warning({slug: warning.slug})">{{warning.description}}</a></td>
+          <td>{{warning.timeRaised | amDateFormat:'DD.MM.YYYY'}}</td>
+          <td>{{warning.eaAreaName}}</td>
+          <td>{{warning.eaRegionName}}</td>
+          <td>{{warning.floodArea.riverOrSea}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div ng-if="warnings.length > 0">
+    <div id="gmap">
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" bounds="map.bounds">
+          <ui-gmap-polygons models="map.polygons" path="'geom'" fit="true"
+                 fill="{ color: '#2c8aa7', weight: 2, opacity: '0.6' }"
+                 stroke="{ color: '#1A24A7', weight: 2, opacity: '0.7' }">
+          </ui-gmap-polygons>
+        </ui-gmap-google-map>
+      </div>
+  </div>
+
+  <div class="panel-body" ng-if="warnings.length == 0">
+    <p>No Warnings found for your "{{query}}" query</p>
+  </div>
+
+</div>

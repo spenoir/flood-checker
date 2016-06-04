@@ -31,6 +31,7 @@ System.config({
     "angular": "github:angular/bower-angular@1.4.8",
     "angular-bootstrap": "github:angular-ui/bootstrap-bower@0.14.3",
     "angular-google-maps": "github:angular-ui/angular-google-maps@2.3.2",
+    "angular-moment": "npm:angular-moment@1.0.0-beta.6",
     "angular-route": "github:angular/bower-angular-route@1.4.8",
     "angular-simple-logger": "npm:angular-simple-logger@0.1.5",
     "angular-slugify": "github:paulsmith/angular-slugify@1.0.1",
@@ -41,6 +42,7 @@ System.config({
     "core-js": "npm:core-js@1.2.6",
     "jquery": "github:components/jquery@2.1.4",
     "lodash": "npm:lodash@3.10.1",
+    "moment": "npm:moment@2.13.0",
     "ngmap": "github:allenhwkim/angularjs-google-maps@1.16.7",
     "ocLazyLoad": "github:ocombe/ocLazyLoad@1.0.9",
     "paulsmith/angular-slugify": "github:paulsmith/angular-slugify@1.0.1",
@@ -110,6 +112,9 @@ System.config({
     },
     "github:jspm/nodelibs-vm@0.1.0": {
       "vm-browserify": "npm:vm-browserify@0.0.4"
+    },
+    "npm:angular-moment@1.0.0-beta.6": {
+      "moment": "npm:moment@2.13.0"
     },
     "npm:angular-simple-logger@0.1.5": {
       "angular": "github:angular/bower-angular@1.4.8",
