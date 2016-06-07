@@ -1,7 +1,7 @@
 # Flood warnings checker
 
 This app uses the following technologies: 
-SystemJS, jspm, CoffeeScript, NodeJS, MongoDB, Mongoose, Angular, Bootstrap, 
+SystemJS, jspm, CoffeeScript, NodeJS, MongoDB, Mongoose, Angular, Bootstrap CSS, 
 Angular UI, Mocha
 
 It is influenced by [angular-systemjs-seed](https://github.com/Swimlane/angular-systemjs-seed)
@@ -15,8 +15,6 @@ It is influenced by [angular-systemjs-seed](https://github.com/Swimlane/angular-
   
 ## Run tests with debug  
   `node-debug $(which grunt) mochaTest`
-
-A stackoverflow link for [debugging with coffee](http://stackoverflow.com/questions/27754053/invoking-the-coffeescript-repl)
 
 ## Flood data links
 

@@ -1,13 +1,15 @@
-<h1>Flood warnings checker</h1>
-<p>Welcome to Flood warnings checker.
-  You can check the latest River or Sea flood warnings and also historical warnings raised by
-  the <a href="https://www.gov.uk/government/organisations/environment-agency">
-    Environment Agency</a>.
-  We display flood areas on maps and display data
-  available for each warning. You can also search for warnings by keyword!
-</p>
-<p>We only record alerts with a minimum severity level of 'Flood Warning' here which is the second most severe warning.
-  'Severe Flood Warnings' will also be displayed. You
+<div class="jumbotron">
+  <h1>Flood Warnings Checker</h1>
+  <p>Welcome to Flood warnings checker.</p>
+
+    <p>You can check the latest River or Sea flood warnings and also historical warnings raised by
+    the <a href="https://www.gov.uk/government/organisations/environment-agency">
+      Environment Agency</a>.
+    We display flood areas on maps and display data
+    available for each warning. You can also search for warnings by keyword.
+  </p>
+</div>
+<p>We record alerts with a minimum severity level of 'Flood Warning', and 'Severe Flood Warning', the two most severe alerts.You
   can visit the
   <a href="https://www.gov.uk/government/organisations/environment-agency">
     Enviroment Agency's</a> website to see all Flood warnings issued with lower
@@ -19,3 +21,4 @@
 <p ng-if="currentWarnings.length > 0">Below you can see a list of the current flood warnings:</p>
 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-if="currentWarnings.length > 0" ng-repeat="warning in currentWarnings"
      ng-include="'/frontend/partials/warningCard.html'"></div>
+<p></p> A further update to the app is planned for the near future, and will concern ground flood warnings. <p></p>
