@@ -38,8 +38,6 @@
     "morgan": "latest",
     "node-sass": "latest",
     "node-sass-middleware": "latest",
-    "passport": "latest",
-    "passport-local": "^1.0.0",
     "q": "^1.4.1",
     "serve-favicon": "latest",
     "slug": "^0.9.1",
