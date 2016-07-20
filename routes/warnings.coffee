@@ -79,4 +79,4 @@ router.get('/:warningSlug/json', (req, res) ->
   res.json(req.warning)
 )
 
-module.exports = router;
+module.exports = router

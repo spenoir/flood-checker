@@ -8,15 +8,16 @@ Warning = mongoose.model "Warning"
 config = require '../config'
 
 
-router.get "/", (req, res) ->
-  res.render "index", res.context
+router.get("/", (req, res) ->
+  res.render("index", res.context)
+)
 
-router.get "/search/json/", (req, res) ->
+router.get("/search/json/", (req, res) ->
   query = req.query.q
   Warning.setKeywords (err) ->
     if err
       res.status 500
-      return res.render "error",
+      res.render "error",
         message: "There was an error when setting the Warning keywords"
 
 
@@ -26,8 +27,8 @@ router.get "/search/json/", (req, res) ->
     _.extend(res.context,
       warnings: data.results
     )
-    return res.json(res.context)
+    res.json(res.context)
   )
-
+)
 
 module.exports = router

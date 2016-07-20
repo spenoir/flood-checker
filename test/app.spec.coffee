@@ -28,46 +28,33 @@ exampleWarning =
 
 describe('app', ->
   beforeEach () ->
-    @agent = request.agent(app);
+    @agent = request.agent app
 
   it('should load json on search route', (done) ->
-
-    api = new apiWrapper()
-
-    warning = api.newWarning(exampleWarning)
-
-    warning.then( (model) ->
-      Warning.findOne(
-        slug: 'keswick-campsite'
-        , (err, warning) ->
-          should.exist(warning)
-
-          @agent
-          .get('/search/')
-          .expect(200, done)
-      )
-    )
-  )
-
-#  it('should load search route', (done) ->
-#
-#    @agent
-#    .get('/search/')
-#    .expect(200, done)
-#  )
-
-  it('should load warnings route', (done) ->
+    @timeout 10000
 
     @agent
-    .get('/warnings/')
-    .expect(200, done)
+      .get('/search/json/?q=york')
+      .expect(200)
+      .end( (err, res) ->
+        res.headers['content-type'].match('application/json').should.lengthOf(1)
+        done()
+      )
+  )
+
+  it('should load warnings json route', (done) ->
+
+    @agent
+      .get('/warnings/json/')
+      .expect(200, done)
   )
 
   it('should load home route', (done) ->
+    @timeout 10000
 
     @agent
-    .get('/')
-    .expect(200, done)
+      .get('/')
+      .expect(200, done)
   )
 
   it('should load current warnings json', (done) ->

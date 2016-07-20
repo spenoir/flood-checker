@@ -59,19 +59,21 @@ describe('Environment Agency API wrapper', ->
 
   )
 
-  it('should find new warnings', (done) ->
-    api = new apiWrapper()
-    api.makeRequest().then( (response) ->
-      api.findNew(response.items).then((newWarnings) ->
-        api.newBatch(newWarnings).then((addedWarnings) ->
-          addedWarnings.length.should.greaterThan(1)
-          done()
-        ).fail((err) ->
-          err.should.equal('There are no new warnings at this time')
-        )
-      )
-    )
-  )
+#  it('should find new warnings', (done) ->
+#    api = new apiWrapper()
+#    api.makeRequest().then( (response) ->
+#      api.findNew(response.items).then((newWarnings) ->
+#        debugger
+#        api.newBatch(newWarnings).then((addedWarnings) ->
+#
+#          addedWarnings.length.should.greaterThan(1)
+#          done()
+#        ).fail((err) ->
+#          err.should.equal('There are no new warnings at this time')
+#        )
+#      )
+#    )
+#  )
 
 #  it('should save new warnings', (done) ->
 #
