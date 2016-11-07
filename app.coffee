@@ -10,7 +10,7 @@ _ = require 'underscore'
 
 config = require './config'
 
-mongoose = require "mongoose"
+mongoose = require 'mongoose'
 
 user = process.env.MONGO_USER
 pwd = process.env.MONGO_PWD
@@ -25,11 +25,10 @@ else
   mongoose.connect(config.db.default)
 
 flash = require 'connect-flash'
-routes = require("./routes/index")
-routesWarnings = require("./routes/warnings")
+routes = require './routes/index'
+routesWarnings = require './routes/warnings'
 
-require('./models/warning')
-require('./models/user')
+require './models/warning'
 
 Warning = mongoose.model("Warning")
 

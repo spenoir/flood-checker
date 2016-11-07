@@ -4,7 +4,7 @@ import angular from 'angular';
 import $ from 'jquery';
 import _ from 'lodash';
 import 'moment';
-import 'angular-route';
+
 import 'angular-simple-logger';
 import 'angular-google-maps';
 import 'angular-bootstrap';
@@ -20,7 +20,7 @@ import { WarningController } from 'controllers/warning';
 
 let app = angular.module('floodChecker',
   [
-    'ngRoute', 'ui.bootstrap', 'ui.bootstrap.tpls',
+    'ui.bootstrap', 'ui.bootstrap.tpls',
     'uiGmapgoogle-maps', 'ui.router', 'slugifier', 'angularMoment'
   ]
 );
